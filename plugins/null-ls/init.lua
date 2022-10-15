@@ -14,6 +14,11 @@ local b = null_ls.builtins
 local sources = {
   b.formatting.isort,
   b.formatting.black,
+  b.diagnostics.mypy,
+  b.diagnostics.flake8,
+  b.diagnostics.pydocstyle,
+  b.formatting.shfmt,
+  b.diagnostics.shellcheck,
   b.formatting.prettier,
   julia,
   -- JS html css stuff

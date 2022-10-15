@@ -23,6 +23,8 @@ return {
         "pyright",
         "black",
         "mypy",
+        "flake8",
+        "pydocstyle",
         "julia-lsp",
         "shfmt",
         "shellcheck",
