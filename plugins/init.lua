@@ -10,7 +10,7 @@ return {
   ["nvim-treesitter/nvim-treesitter"] = {
     override_options = {
       indent = {
-        disable = { "julia" }
+        enable = false,
       },
     },
   },
