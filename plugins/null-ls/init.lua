@@ -12,7 +12,7 @@ end
 local b = null_ls.builtins
 
 local sources = {
-
+  b.formatting.isort,
   b.formatting.black,
   b.formatting.prettier,
   julia,
