@@ -3,7 +3,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require("lspconfig")
 
-local servers = { "html", "cssls", "jedi_language_server", "julials" }
+local servers = { "html", "cssls", "julials" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -16,11 +16,20 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
--- typescript
-
 lspconfig.tsserver.setup({
-	on_attach = function(client, bufnr)
+	on_attach = function(client, _)
 		client.resolved_capabilities.document_formatting = false
-		-- vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>fm", "<cmd>lua vim.lsp.buf.formatting()<CR>", {})
 	end,
+})
+
+lspconfig.pyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off"
+			}
+		}
+	}
 })
