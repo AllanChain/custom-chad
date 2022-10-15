@@ -7,6 +7,28 @@ return {
     module = "which-key",
     keys = { "<leader>", '"', "'", "`", "g" },
   },
+   ["williamboman/mason.nvim"] = {
+   override_options = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "css-lsp",
+        "html-lsp",
+        "typescript-language-server",
+        "vue-language-server",
+        "svelte-language-server",
+        "astro-language-server",
+        "emmet-ls",
+        "json-lsp",
+        "pyright",
+        "black",
+        "mypy",
+        "julia-lsp",
+        "shfmt",
+        "shellcheck",
+      },
+    },
+  },
   ["nvim-treesitter/nvim-treesitter"] = {
     override_options = {
       indent = {
