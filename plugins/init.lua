@@ -7,8 +7,15 @@ return {
     module = "which-key",
     keys = { "<leader>", '"', "'", "`", "g" },
   },
-   ["williamboman/mason.nvim"] = {
-   override_options = {
+  ["wbthomason/packer.nvim"] = {
+    override_options = {
+      git = {
+        default_url_format = "https://ghproxy.com/github.com/%s.git",
+      },
+    },
+  },
+  ["williamboman/mason.nvim"] = {
+    override_options = {
       ensure_installed = {
         "lua-language-server",
         "stylua",
@@ -40,7 +47,7 @@ return {
   },
 
   ["hrsh7th/nvim-cmp"] = {
-    override_options = require "custom.plugins.cmp"
+    override_options = require "custom.plugins.cmp",
   },
   ["goolord/alpha-nvim"] = {
     disable = false,
