@@ -40,3 +40,7 @@ lspconfig.pyright.setup {
     },
   },
 }
+
+vim.diagnostic.config({
+  virtual_text = false
+})
