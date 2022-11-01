@@ -16,7 +16,7 @@ local sources = {
   b.formatting.black,
   b.diagnostics.mypy,
   b.diagnostics.flake8,
-  b.diagnostics.pydocstyle,
+  b.diagnostics.pydocstyle.with { extra_args = { "--ignore=D1" } },
   b.formatting.shfmt,
   b.diagnostics.shellcheck,
   b.formatting.prettier,
