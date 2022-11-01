@@ -53,6 +53,7 @@ return {
     disable = false,
     cmd = "Alpha",
   },
+  ["tpope/vim-surround"] = {},
   ["wakatime/vim-wakatime"] = {
     after = "nvim-lspconfig",
   },
