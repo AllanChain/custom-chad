@@ -1,6 +1,13 @@
 return {
   ["tpope/vim-sleuth"] = {},
   ["JuliaEditorSupport/julia-vim"] = {},
+  ["ahmedkhalf/project.nvim"] = {
+    config = function()
+      require("project_nvim").setup {
+        -- detection_methods = { "lsp", "pattern" },
+      }
+    end,
+  },
   -- ["arthurxavierx/vim-unicoder"] = {},
   ["folke/which-key.nvim"] = {
     disable = false,
@@ -45,7 +52,17 @@ return {
       },
     },
   },
-
+  ["kyazdani42/nvim-tree.lua"] = {
+    override_options = {
+      open_on_setup = true,
+      sync_root_with_cwd = true,
+      respect_buf_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_root = true,
+      },
+    },
+  },
   ["hrsh7th/nvim-cmp"] = {
     override_options = require "custom.plugins.cmp",
   },
