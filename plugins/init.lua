@@ -8,6 +8,7 @@ return {
       }
     end,
   },
+  ["cshuaimin/ssr.nvim"] = {},
   -- ["arthurxavierx/vim-unicoder"] = {},
   ["folke/which-key.nvim"] = {
     disable = false,

@@ -10,6 +10,10 @@ M.user = {
     ["<leader>rf"] = { ":w<CR>:RunFile<CR>", "run file", opts = { noremap = true, silent = false } },
     ["<leader>qq"] = { ":q<CR>", "close window" },
     ["<leader>qa"] = { ":qa<CR>", "close all" },
+    ["<leader>sr"] = {
+      function() require("ssr").open() end,
+      "structural search and replace",
+    }
   },
 }
 
