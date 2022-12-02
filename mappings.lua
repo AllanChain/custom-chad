@@ -19,26 +19,35 @@ M.user = {
       "structural replace",
     },
     ["<leader>do"] = {
-      function()
-        vim.diagnostic.open_float()
-      end,
+      vim.diagnostic.open_float,
       "open diagnostic",
       opts = { noremap = true, silent = true },
     },
     ["<leader>dd"] = {
-      function()
-        vim.diagnostic.disable()
-      end,
+      vim.diagnostic.disable,
       "disable diagnostic",
       opts = { noremap = true, silent = true },
     },
     ["<leader>de"] = {
-      function()
-        vim.diagnostic.enable()
-      end,
+      vim.diagnostic.enable,
       "enable diagnostic",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>fd"] = {
+      function()
+        require("telescope.builtin").diagnostics()
+      end,
+      "find diagnostic",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>fg"] = {
+      function()
+        require("telescope.builtin").git_commits()
+      end,
+      "find diagnostic",
       opts = { noremap = true, silent = true },
     },
   },
 }
+
 return M
