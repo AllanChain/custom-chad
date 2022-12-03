@@ -1,15 +1,22 @@
 return {
   ["tpope/vim-sleuth"] = {},
-  ["JuliaEditorSupport/julia-vim"] = {},
-  ["ahmedkhalf/project.nvim"] = {
+  ["folke/todo-comments.nvim"] = {
     config = function()
-      require("project_nvim").setup {
-        -- detection_methods = { "lsp", "pattern" },
-      }
+      require("todo-comments").setup {}
+    end
+  },
+  ["ggandor/leap.nvim"] = { -- s{char1}{char2} fast navigation
+    config = function()
+      require('leap').add_default_mappings(true)
+    end
+  },
+  ["JuliaEditorSupport/julia-vim"] = {},
+  ["ahmedkhalf/project.nvim"] = { -- auto cd into project root
+    config = function()
+      require("project_nvim").setup {}
     end,
   },
   ["cshuaimin/ssr.nvim"] = {},
-  -- ["arthurxavierx/vim-unicoder"] = {},
   ["folke/which-key.nvim"] = {
     disable = false,
     module = "which-key",
