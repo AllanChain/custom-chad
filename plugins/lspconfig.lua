@@ -16,10 +16,6 @@ for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    root_dir = vim.loop.cwd,
-    flags = {
-      debounce_text_changes = 150,
-    },
   }
 end
 
@@ -39,4 +35,16 @@ lspconfig.pyright.setup {
       },
     },
   },
+}
+
+lspconfig.julials.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    julia = {
+      lint = {
+        missingrefs = "none"
+      }
+    }
+  }
 }
