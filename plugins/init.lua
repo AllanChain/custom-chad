@@ -74,6 +74,7 @@ return {
   ["hrsh7th/nvim-cmp"] = {
     override_options = require "custom.plugins.cmp",
   },
+  ["kdheepak/cmp-latex-symbols"] = { after = "nvim-cmp" },
   ["goolord/alpha-nvim"] = {
     disable = false,
     cmd = "Alpha",
