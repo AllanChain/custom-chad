@@ -1,22 +1,7 @@
 return {
-  ["tpope/vim-sleuth"] = {},
-  ["folke/todo-comments.nvim"] = {
-    config = function()
-      require("todo-comments").setup {}
-    end
-  },
-  ["ggandor/leap.nvim"] = { -- s{char1}{char2} fast navigation
-    config = function()
-      require('leap').add_default_mappings(true)
-    end
-  },
-  ["JuliaEditorSupport/julia-vim"] = {},
-  ["ahmedkhalf/project.nvim"] = { -- auto cd into project root
-    config = function()
-      require("project_nvim").setup {}
-    end,
-  },
-  ["cshuaimin/ssr.nvim"] = {},
+  --[[======================================================
+                Configure builtin plugins
+  ========================================================]]
   ["folke/which-key.nvim"] = {
     disable = false,
     module = "which-key",
@@ -74,32 +59,51 @@ return {
   ["hrsh7th/nvim-cmp"] = {
     override_options = require "custom.plugins.cmp",
   },
-  ["kdheepak/cmp-latex-symbols"] = { after = "nvim-cmp" },
-  ["goolord/alpha-nvim"] = {
-    disable = false,
-    cmd = "Alpha",
-  },
-  ["tpope/vim-surround"] = {},
-  ["wakatime/vim-wakatime"] = {
-    after = "nvim-lspconfig",
-  },
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
     config = function()
       require "custom.plugins.null-ls"
     end,
   },
-  ["CRAG666/code_runner.nvim"] = {
-    requires = "nvim-lua/plenary.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-      require "custom.plugins.code_runner"
-    end,
-  },
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
+    end,
+  },
+  --[[======================================================
+                      My custom plugins
+  ========================================================]]
+  ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
+  ["tpope/vim-surround"] = {}, -- easy change surroundings
+  ["folke/todo-comments.nvim"] = { -- NOTE: fancy TODO comment
+    config = function()
+      require("todo-comments").setup {}
+    end,
+  },
+  ["ggandor/leap.nvim"] = { -- s{char1}{char2} fast navigation
+    config = function()
+      require("leap").add_default_mappings(true)
+    end,
+  },
+  ["JuliaEditorSupport/julia-vim"] = {},
+  ["ahmedkhalf/project.nvim"] = { -- auto cd into project root
+    config = function()
+      require("project_nvim").setup {}
+    end,
+  },
+  ["cshuaimin/ssr.nvim"] = {}, -- structural search and replace
+  ["kdheepak/cmp-latex-symbols"] = { -- add unicode math completion
+    after = "nvim-cmp",
+  },
+  ["wakatime/vim-wakatime"] = { -- Wakatime integration
+    after = "nvim-lspconfig",
+  },
+  ["CRAG666/code_runner.nvim"] = { -- Quickly run script inside vim
+    requires = "nvim-lua/plenary.nvim",
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.code_runner"
     end,
   },
 }
