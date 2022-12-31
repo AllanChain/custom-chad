@@ -57,7 +57,7 @@ return {
       git = {
         enable = true,
         ignore = true,
-      }
+      },
     },
   },
   ["hrsh7th/nvim-cmp"] = {
@@ -80,6 +80,9 @@ return {
   ========================================================]]
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
+  ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
+    require("nvim-lastplace").setup {},
+  },
   ["folke/todo-comments.nvim"] = { -- NOTE: fancy TODO comment
     config = function()
       require("todo-comments").setup {}
