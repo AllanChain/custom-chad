@@ -54,6 +54,10 @@ return {
         enable = true,
         update_root = true,
       },
+      git = {
+        enable = true,
+        ignore = true,
+      }
     },
   },
   ["hrsh7th/nvim-cmp"] = {
