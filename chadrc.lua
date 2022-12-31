@@ -7,7 +7,7 @@ M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 M.mappings = require("custom.mappings")
 
 M.ui = {
-	transparency = false,
+	transparency = true,
 	theme = "doomchad",
 }
 
