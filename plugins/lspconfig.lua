@@ -21,7 +21,7 @@ end
 
 lspconfig.tsserver.setup {
   on_attach = function(client, _)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = false
   end,
 }
 
