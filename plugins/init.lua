@@ -81,7 +81,9 @@ return {
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
   ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
-    require("nvim-lastplace").setup {},
+    config = function()
+      require("nvim-lastplace").setup {}
+    end,
   },
   ["folke/todo-comments.nvim"] = { -- NOTE: fancy TODO comment
     config = function()
