@@ -101,6 +101,11 @@ return {
       require("project_nvim").setup {}
     end,
   },
+  ["Pocco81/auto-save.nvim"] = { -- auto save
+    config = function()
+      require("auto-save").setup {}
+    end,
+  },
   ["cshuaimin/ssr.nvim"] = {}, -- structural search and replace
   ["kdheepak/cmp-latex-symbols"] = { -- add unicode math completion
     after = "nvim-cmp",
