@@ -40,6 +40,9 @@ return {
   },
   ["nvim-treesitter/nvim-treesitter"] = {
     override_options = {
+      yati = {
+        enable = true,
+      },
       indent = {
         enable = false,
       },
@@ -80,6 +83,9 @@ return {
   ========================================================]]
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
+  ["yioneko/nvim-yati"] = { -- better indent than treesitter
+    requires = "nvim-treesitter/nvim-treesitter",
+  },
   ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
     config = function()
       require("nvim-lastplace").setup {}
