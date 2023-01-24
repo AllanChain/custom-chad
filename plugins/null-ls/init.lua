@@ -12,10 +12,10 @@ end
 local b = null_ls.builtins
 
 local sources = {
-  b.formatting.isort,
+  b.formatting.isort.with { extra_args = { "--profile=black" }},
   b.formatting.black,
   b.diagnostics.mypy,
-  b.diagnostics.flake8,
+  b.diagnostics.flake8.with { extra_args = { "--max-line-length=88" }},
   b.diagnostics.pydocstyle.with { extra_args = { "--ignore=D1" } },
   b.formatting.shfmt,
   b.diagnostics.shellcheck,
