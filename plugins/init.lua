@@ -39,14 +39,41 @@ return {
     },
   },
   ["nvim-treesitter/nvim-treesitter"] = {
-    override_options = {
-      yati = {
-        enable = true,
-      },
-      indent = {
-        enable = false,
-      },
-    },
+    -- Overriding whole config function to enable ghproxy
+    config = function()
+      -- copied from NvChad config
+      require("base46").load_highlight "treesitter"
+
+      -- change install url of parsers to ghproxy
+      local parsers = require "nvim-treesitter.parsers"
+      for _, parser in pairs(parsers.list) do
+        parser.install_info.url = parser.install_info.url:gsub("github", "ghproxy.com/github")
+      end
+
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = {
+          "lua",
+          "vim",
+          "help",
+          "python",
+          "javascript",
+          "css",
+          "html",
+          "bash",
+        },
+        highlight = {
+          enable = true,
+          use_languagetree = true,
+        },
+        -- use yati indent instead of the original one
+        yati = {
+          enable = true,
+        },
+        indent = {
+          enable = false,
+        },
+      }
+    end,
   },
   ["kyazdani42/nvim-tree.lua"] = {
     override_options = {
