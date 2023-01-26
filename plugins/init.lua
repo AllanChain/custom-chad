@@ -14,6 +14,20 @@ return {
       },
     },
   },
+  ["NvChad/nvterm"] = {
+    override_options = {
+      terminals = {
+        type_opts = {
+          float = {
+            row = 0,
+            col = 0,
+            width = 1,
+            height = 0.8,
+          },
+        },
+      },
+    },
+  },
   ["williamboman/mason.nvim"] = {
     override_options = {
       ensure_installed = {
