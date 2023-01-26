@@ -14,20 +14,7 @@ return {
       },
     },
   },
-  ["NvChad/nvterm"] = {
-    override_options = {
-      terminals = {
-        type_opts = {
-          float = {
-            row = 0,
-            col = 0,
-            width = 1,
-            height = 0.8,
-          },
-        },
-      },
-    },
-  },
+  ["NvChad/nvterm"] = false,
   ["williamboman/mason.nvim"] = {
     override_options = {
       ensure_installed = {
@@ -165,6 +152,26 @@ return {
     after = "nvim-lspconfig",
     config = function()
       require "custom.plugins.code_runner"
+    end,
+  },
+  ["akinsho/toggleterm.nvim"] = {
+    tag = "*",
+    config = function()
+      require("toggleterm").setup {
+        size = 20,
+        open_mapping = [[<c-\>]],
+        hide_numbers = true,
+        shade_terminals = false,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        direction = "float",
+        close_on_exit = true,
+        shell = vim.o.shell,
+        float_opts = {
+          border = "curved",
+        },
+      }
     end,
   },
 }
