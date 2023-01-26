@@ -37,6 +37,9 @@ return {
         "shfmt",
         "shellcheck",
       },
+      github = {
+        download_url_template = "https://ghproxy.com/github.com/%s/releases/download/%s/%s",
+      }
     },
   },
   ["nvim-treesitter/nvim-treesitter"] = {
