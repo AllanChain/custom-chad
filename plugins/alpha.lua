@@ -49,10 +49,13 @@ function M.recent_projects(start)
     return require("alpha.themes.theta").mru(start, vim.fn.getcwd())
   end
   local buttons = {}
-  for i, project_path in pairs(project.get_recent_projects()) do
-    if i > 9 then
-      break
-    end
+  local project_paths = project.get_recent_projects()
+  -- most recent project is the last
+  if #project_paths > 9 then
+    project_paths = vim.list_slice(project_paths, #project_paths - 9, #project_paths)
+  end
+  for i = 1, #project_paths do
+    local project_path = project_paths[#project_paths - i + 1]
     local shortcut = tostring(i - start + 1)
     buttons[i] = {
       type = "button",
