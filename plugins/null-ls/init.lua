@@ -4,10 +4,7 @@ if not ok then
   return
 end
 
-local ok, julia = pcall(require, "custom.plugins.null-ls.julia")
-if not ok then
-  return
-end
+local julia = require("custom.plugins.null-ls.julia")
 
 local b = null_ls.builtins
 

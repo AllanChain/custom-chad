@@ -3,6 +3,7 @@
 -- bash script written by me. For more information, see
 -- https://allanchain.github.io/blog/post/julia-nvim/
 
+-- already checked null-ls in init.lua
 local h = require "null-ls.helpers"
 local methods = require "null-ls.methods"
 

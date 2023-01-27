@@ -1,10 +1,8 @@
--- local ok, code_runner = pcall(require, "code_runner")
---
--- if not ok then
--- 	return
--- end
+local ok, code_runner = pcall(require, "code_runner")
 
-local code_runner = require("code_runner")
+if not ok then
+	return
+end
 
 code_runner.setup({
   -- put here the commands by filetype

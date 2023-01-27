@@ -39,22 +39,35 @@ return {
       },
       github = {
         download_url_template = "https://ghproxy.com/github.com/%s/releases/download/%s/%s",
-      }
+      },
     },
   },
   ["nvim-treesitter/nvim-treesitter"] = {
     -- Overriding whole config function to enable ghproxy
     config = function()
       -- copied from NvChad config
-      require("base46").load_highlight "treesitter"
+      local ok, base46 = pcall(require, "base46")
+      if not ok then
+        return
+      end
+      base46.load_highlight "treesitter"
 
       -- change install url of parsers to ghproxy
-      local parsers = require "nvim-treesitter.parsers"
+      ---@diagnostic disable-next-line:redefined-local
+      local ok, parsers = pcall(require, "nvim-treesitter.parsers")
+      if not ok then
+        return
+      end
       for _, parser in pairs(parsers.list) do
         parser.install_info.url = parser.install_info.url:gsub("github", "ghproxy.com/github")
       end
 
-      require("nvim-treesitter.configs").setup {
+      ---@diagnostic disable-next-line:redefined-local
+      local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+      if not ok then
+        return
+      end
+      treesitter.setup {
         ensure_installed = {
           "lua",
           "vim",
@@ -119,28 +132,48 @@ return {
   },
   ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
     config = function()
-      require("nvim-lastplace").setup {}
+      local ok, lastplace = pcall(require, "nvim-lastplace")
+      if not ok then
+        return
+      end
+      lastplace.setup {}
     end,
   },
   ["folke/todo-comments.nvim"] = { -- NOTE: fancy TODO comment
     config = function()
-      require("todo-comments").setup {}
+      local ok, comments = pcall(require, "todo-comments")
+      if not ok then
+        return
+      end
+      comments.setup {}
     end,
   },
   ["ggandor/leap.nvim"] = { -- s{char1}{char2} fast navigation
     config = function()
-      require("leap").add_default_mappings(true)
+      local ok, leap = pcall(require, "leap")
+      if not ok then
+        return
+      end
+      leap.add_default_mappings(true)
     end,
   },
   ["JuliaEditorSupport/julia-vim"] = {},
   ["ahmedkhalf/project.nvim"] = { -- auto cd into project root
     config = function()
-      require("project_nvim").setup {}
+      local ok, project = pcall(require, "project_nvim")
+      if not ok then
+        return
+      end
+      project.setup {}
     end,
   },
   ["Pocco81/auto-save.nvim"] = { -- auto save
     config = function()
-      require("auto-save").setup {}
+      local ok, autosave = pcall(require, "auto-save")
+      if not ok then
+        return
+      end
+      autosave.setup {}
     end,
   },
   ["cshuaimin/ssr.nvim"] = {}, -- structural search and replace
@@ -160,7 +193,11 @@ return {
   ["akinsho/toggleterm.nvim"] = {
     tag = "*",
     config = function()
-      require("toggleterm").setup {
+      local ok, toggleterm = pcall(require, "toggleterm")
+      if not ok then
+        return
+      end
+      toggleterm.setup {
         size = 20,
         open_mapping = [[<c-\>]],
         hide_numbers = true,

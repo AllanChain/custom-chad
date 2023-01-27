@@ -1,7 +1,7 @@
 local mappings = require "core.mappings"
 
 local M = {
-  disabled = mappings.nvterm
+  disabled = mappings.nvterm,
 }
 
 -- M.disabled = vim.tbl_deep_extend("force", M.disabled, mappings.nvterm)
@@ -56,40 +56,18 @@ M.user = {
   },
 }
 
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({
-  cmd = "lazygit",
-  dir = "git_dir",
-  direction = "float",
-  float_opts = {
-    border = "double",
-    width = function (term)
-      return vim.o.columns - 4
-    end,
-    height = function (term)
-      return vim.o.lines - 5
-    end,
-  },
-  -- function to run on opening the terminal
-  on_open = function(term)
-    vim.cmd("startinsert!")
-    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-  end,
-  -- function to run on closing the terminal
-  on_close = function(term)
-    vim.cmd("startinsert!")
-  end,
-})
-
 M.term = {
   n = {
     ["<leader>gg"] = {
       function()
-        lazygit:toggle()
+        local lazygit = require "custom.integrations.lazygit"
+        if lazygit then
+          lazygit:toggle()
+        end
       end,
       "open Lazygit",
     },
-  }
+  },
 }
 
 return M
