@@ -15,6 +15,16 @@ return {
     },
   },
   ["NvChad/nvterm"] = false,
+  ["goolord/alpha-nvim"] = {
+    disable = false,
+    config = function()
+      local has_alpha, alpha = pcall(require, "alpha")
+      if not has_alpha then
+        return
+      end
+      alpha.setup(require("custom.plugins.alpha").config)
+    end,
+  },
   ["williamboman/mason.nvim"] = {
     override_options = {
       ensure_installed = {
