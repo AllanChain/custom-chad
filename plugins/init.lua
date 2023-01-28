@@ -191,7 +191,18 @@ return {
       if not ok then
         return
       end
-      autosave.setup {}
+      local utils = require "auto-save.utils.data"
+      autosave.setup {
+        condition = function(buf)
+          if
+            vim.fn.getbufvar(buf, "&modifiable") == 1
+            and utils.not_in(vim.fn.getbufvar(buf, "&filetype"), { "TelescopePrompt", "alpha" })
+          then
+            return true
+          end
+          return false
+        end,
+      }
     end,
   },
   ["cshuaimin/ssr.nvim"] = {}, -- structural search and replace
