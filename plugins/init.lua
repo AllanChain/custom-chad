@@ -174,7 +174,10 @@ return {
       if not ok then
         return
       end
-      project.setup {}
+      project.setup {
+        detection_methods = { "pattern", "lsp" },
+        silent_chdir = false,
+      }
     end,
   },
   ["Pocco81/auto-save.nvim"] = { -- auto save
