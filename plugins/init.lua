@@ -16,6 +16,7 @@ return {
   },
   ["NvChad/nvterm"] = false,
   ["nvim-telescope/telescope.nvim"] = {
+    ft = { "alpha" },
     override_options = {
       extensions_list = { "themes", "projects" },
     },
