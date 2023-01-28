@@ -132,7 +132,8 @@ M.section_info = {
 
 function M.shortcuts()
   local keybind_opts = { silent = true, noremap = true }
-  vim.api.nvim_create_autocmd({ "User AlphaReady" }, {
+  vim.api.nvim_create_autocmd({ "User" }, {
+    pattern = { "AlphaReady" },
     callback = function(_)
       vim.api.nvim_buf_set_keymap(0, "n", "p", "<cmd>Telescope projects<CR>", keybind_opts)
       vim.api.nvim_buf_set_keymap(0, "n", "t", "<cmd>Telescope themes<CR>", keybind_opts)
