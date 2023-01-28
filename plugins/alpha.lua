@@ -114,21 +114,6 @@ M.section_footer = {
 }
 
 function M.shortcuts()
-  local function text(val)
-    return {
-      type = "text",
-      val = val,
-      opts = {
-        position = "center",
-        hl = {
-          { "Number", 1, 3 },
-          { "Keyword", 21, 22 },
-          { "Number", 30, 32 },
-          { "Keyword", 49, 51 },
-        },
-      },
-    }
-  end
   local keybind_opts = { silent = true, noremap = true }
   vim.api.nvim_create_autocmd({ "User AlphaReady" }, {
     callback = function(_)
@@ -139,8 +124,21 @@ function M.shortcuts()
     end,
   })
   return {
-    text "  Recent Project  p        Themes          t",
-    text "  Settings        s      󰅚  Quit Neovim     q",
+    {
+      type = "text",
+      val = {
+        " Project [p]     Themes [t]     Settings [s]    󰅚 Quit [q]",
+      },
+      opts = {
+        position = "center",
+        hl = {
+          { "String", 1, 20 },
+          { "Keyword", 20, 38 },
+          { "Function", 38, 60 },
+          { "Constant", 60, 80 },
+        },
+      },
+    },
   }
 end
 
