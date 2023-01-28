@@ -2,6 +2,12 @@ local has_project, project = pcall(require, "project_nvim")
 
 local M = {}
 
+local function header_hl_today()
+  local wday = os.date("*t").wday
+  local colors = { "Keyword", "Constant", "Number", "Type", "String", "Special", "Function" }
+  return colors[wday]
+end
+
 M.section_header = {
   type = "text",
   val = {
@@ -17,7 +23,7 @@ M.section_header = {
   },
   opts = {
     position = "center",
-    hl = "String",
+    hl = header_hl_today(),
   },
 }
 
