@@ -2,7 +2,7 @@ local has_project, project = pcall(require, "project_nvim")
 
 local M = {}
 
-M.header = {
+M.section_header = {
   type = "text",
   val = {
     [[                                                                       ]],
@@ -29,16 +29,6 @@ function M.open_project(project_path)
   require("telescope.builtin").find_files {
     cwd = project_path,
   }
-end
-
-function M.footer_text()
-  ---@diagnostic disable-next-line:undefined-field
-  local total_plugins = #vim.tbl_keys(_G.packer_plugins)
-  local datetime = os.date " %Y-%m-%d   %H:%M:%S"
-  local version = vim.version()
-  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
-
-  return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
 end
 
 function M.recent_projects(start)
@@ -87,7 +77,7 @@ function M.recent_projects(start)
   return buttons
 end
 
-M.projects = {
+M.section_projects = {
   type = "group",
   val = {
     {
@@ -104,24 +94,68 @@ M.projects = {
   },
 }
 
+function M.footer_text()
+  ---@diagnostic disable-next-line:undefined-field
+  local total_plugins = #vim.tbl_keys(_G.packer_plugins)
+  local datetime = os.date " %Y-%m-%d   %H:%M:%S"
+  local version = vim.version()
+  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+
+  return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+end
+
+M.section_footer = {
+  type = "text",
+  val = M.footer_text(),
+  opts = {
+    hl = "Constant",
+    position = "center",
+  },
+}
+
+function M.shortcuts()
+  local function text(val)
+    return {
+      type = "text",
+      val = val,
+      opts = {
+        position = "center",
+        hl = {
+          { "Number", 1, 3 },
+          { "Keyword", 21, 22 },
+          { "Number", 30, 32 },
+          { "Keyword", 49, 51 },
+        },
+      },
+    }
+  end
+  local keybind_opts = {silent=true, noremap=true}
+  vim.api.nvim_create_autocmd({ "User AlphaReady" }, {
+    callback = function(_)
+      vim.api.nvim_buf_set_keymap(0, "n", "p", "<cmd>Telescope projects<CR>", keybind_opts)
+      vim.api.nvim_buf_set_keymap(0, "n", "t", "<cmd>Telescope themes<CR>", keybind_opts)
+      vim.api.nvim_buf_set_keymap(0, "n", "s", "<cmd>e $MYVIMRC<CR>", keybind_opts)
+      vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>q<CR>", keybind_opts)
+    end,
+  })
+  return {
+    text "  Recent Project  p        Themes          t",
+    text "  Settings        s      󰅚  Quit Neovim     q",
+  }
+end
+
+M.section_shortcuts = { type = "group", val = M.shortcuts }
+
 M.config = {
   layout = {
-    M.header,
+    M.section_header,
     { type = "padding", val = 1 },
-    M.projects,
+    M.section_projects,
     { type = "padding", val = 2 },
-    {
-      type = "text",
-      val = M.footer_text(),
-      opts = {
-        hl = "Constant",
-        position = "center",
-      },
-    },
+    M.section_shortcuts,
+    { type = "padding", val = 1 },
+    M.section_footer,
   },
-  -- opts = {
-  --   margin = 5,
-  -- },
 }
 
 return M
