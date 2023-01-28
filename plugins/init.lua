@@ -107,7 +107,7 @@ return {
       }
     end,
   },
-  ["kyazdani42/nvim-tree.lua"] = {
+  ["nvim-tree/nvim-tree.lua"] = {
     override_options = {
       open_on_setup = true,
       sync_root_with_cwd = true,
