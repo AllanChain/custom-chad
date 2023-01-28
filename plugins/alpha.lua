@@ -41,17 +41,17 @@ function M.recent_projects(start)
   local buttons = {}
   local project_paths = project.get_recent_projects()
   local added_projects = 0
-  for i = 1, #project_paths do
+  -- most recent project is the last
+  for i = #project_paths, 1, -1 do
     if added_projects == 9 then
       break
     end
-    -- most recent project is the last
-    local project_path = project_paths[#project_paths - i + 1]
+    local project_path = project_paths[i]
     local stat = vim.loop.fs_stat(project_path .. "/.git")
     if stat ~= nil and stat.type == "directory" then
       added_projects = added_projects + 1
-      local shortcut = tostring(i - start + 1)
-      buttons[i] = {
+      local shortcut = tostring(added_projects)
+      buttons[added_projects] = {
         type = "button",
         val = project_path,
         on_press = function()
@@ -129,7 +129,7 @@ function M.shortcuts()
       },
     }
   end
-  local keybind_opts = {silent=true, noremap=true}
+  local keybind_opts = { silent = true, noremap = true }
   vim.api.nvim_create_autocmd({ "User AlphaReady" }, {
     callback = function(_)
       vim.api.nvim_buf_set_keymap(0, "n", "p", "<cmd>Telescope projects<CR>", keybind_opts)
