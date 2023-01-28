@@ -50,34 +50,39 @@ function M.recent_projects(start)
   end
   local buttons = {}
   local project_paths = project.get_recent_projects()
-  -- most recent project is the last
-  if #project_paths > 9 then
-    project_paths = vim.list_slice(project_paths, #project_paths - 9, #project_paths)
-  end
+  local added_projects = 0
   for i = 1, #project_paths do
+    if added_projects == 9 then
+      break
+    end
+    -- most recent project is the last
     local project_path = project_paths[#project_paths - i + 1]
-    local shortcut = tostring(i - start + 1)
-    buttons[i] = {
-      type = "button",
-      val = project_path,
-      on_press = function()
-        M.open_project(project_path)
-      end,
-      opts = {
-        position = "center",
-        shortcut = shortcut,
-        cursor = 48,
-        width = 50,
-        align_shortcut = "right",
-        hl_shortcut = "Keyword",
-        keymap = {
-          "n",
-          shortcut,
-          "<cmd>lua require('custom.plugins.alpha').open_project('" .. project_path .. "')<CR>",
-          { noremap = true, silent = true, nowait = true },
+    local stat = vim.loop.fs_stat(project_path .. "/.git")
+    if stat ~= nil and stat.type == "directory" then
+      added_projects = added_projects + 1
+      local shortcut = tostring(i - start + 1)
+      buttons[i] = {
+        type = "button",
+        val = project_path,
+        on_press = function()
+          M.open_project(project_path)
+        end,
+        opts = {
+          position = "center",
+          shortcut = shortcut,
+          cursor = 48,
+          width = 50,
+          align_shortcut = "right",
+          hl_shortcut = "Keyword",
+          keymap = {
+            "n",
+            shortcut,
+            "<cmd>lua require('custom.plugins.alpha').open_project('" .. project_path .. "')<CR>",
+            { noremap = true, silent = true, nowait = true },
+          },
         },
-      },
-    }
+      }
+    end
   end
   return buttons
 end
