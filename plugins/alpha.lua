@@ -31,9 +31,12 @@ function M.open_project(project_path)
   }
 end
 
-function M.recent_projects(start)
+function M.recent_projects(start, target_width)
   if start == nil then
     start = 1
+  end
+  if target_width == nil then
+    target_width = 50
   end
   if not has_project then
     return require("alpha.themes.theta").mru(start, vim.fn.getcwd())
@@ -51,19 +54,28 @@ function M.recent_projects(start)
     if stat ~= nil and stat.type == "directory" then
       added_projects = added_projects + 1
       local shortcut = tostring(added_projects)
+      local display_path = project_path:gsub(vim.env.HOME, "~")
+      local path_ok, plenary_path = pcall(require, "plenary.path")
+      if #display_path > target_width and path_ok then
+        display_path = plenary_path.new(display_path):shorten(1, { -2, -1 })
+        if #display_path > target_width then
+          display_path = plenary_path.new(display_path):shorten(1, { -1 })
+        end
+      end
       buttons[added_projects] = {
         type = "button",
-        val = project_path,
+        val = " " .. display_path,
         on_press = function()
           M.open_project(project_path)
         end,
         opts = {
           position = "center",
           shortcut = shortcut,
-          cursor = 48,
-          width = 50,
+          cursor = target_width - 2,
+          width = target_width,
           align_shortcut = "right",
           hl_shortcut = "Keyword",
+          hl = { { "Number", 1, 3 } },
           keymap = {
             "n",
             shortcut,
@@ -82,33 +94,32 @@ M.section_projects = {
   val = {
     {
       type = "text",
-      val = "Recent Projects",
+      val = " Recent Projects",
       opts = {
         hl = "SpecialComment",
         shrink_margin = false,
         position = "center",
       },
     },
-    { type = "padding", val = 1 },
     { type = "group", val = M.recent_projects },
   },
 }
 
-function M.footer_text()
+function M.info_text()
   ---@diagnostic disable-next-line:undefined-field
   local total_plugins = #vim.tbl_keys(_G.packer_plugins)
-  local datetime = os.date " %Y-%m-%d   %H:%M:%S"
+  local datetime = os.date " %Y-%m-%d  󰨳 %A"
   local version = vim.version()
   local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
   return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
 end
 
-M.section_footer = {
+M.section_info = {
   type = "text",
-  val = M.footer_text(),
+  val = M.info_text(),
   opts = {
-    hl = "Constant",
+    hl = "Comment",
     position = "center",
   },
 }
@@ -148,11 +159,11 @@ M.config = {
   layout = {
     M.section_header,
     { type = "padding", val = 1 },
-    M.section_projects,
-    { type = "padding", val = 2 },
     M.section_shortcuts,
     { type = "padding", val = 1 },
-    M.section_footer,
+    M.section_info,
+    { type = "padding", val = 1 },
+    M.section_projects,
   },
 }
 
