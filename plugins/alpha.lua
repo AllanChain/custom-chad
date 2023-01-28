@@ -101,9 +101,8 @@ M.projects = {
 
 M.config = {
   layout = {
-    { type = "padding", val = 1 },
     M.header,
-    { type = "padding", val = 2 },
+    { type = "padding", val = 1 },
     M.projects,
     { type = "padding", val = 2 },
     {
