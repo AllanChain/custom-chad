@@ -178,6 +178,12 @@ return {
         detection_methods = { "pattern", "lsp" },
         silent_chdir = false,
       }
+      ---@diagnostic disable-next-line:redefined-local
+      local ok, telescope = pcall(require, "telescope")
+      if not ok then
+        return
+      end
+      telescope.load_extension "projects"
     end,
   },
   ["Pocco81/auto-save.nvim"] = { -- auto save

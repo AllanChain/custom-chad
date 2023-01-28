@@ -24,6 +24,11 @@ M.user = {
       end,
       "structural replace",
     },
+  },
+}
+
+M.diagnostics = {
+  n = {
     ["<leader>do"] = {
       vim.diagnostic.open_float,
       "open diagnostic",
@@ -39,6 +44,11 @@ M.user = {
       "enable diagnostic",
       opts = { noremap = true, silent = true },
     },
+  },
+}
+
+M.telescope = {
+  n = {
     ["<leader>fd"] = {
       function()
         require("telescope.builtin").diagnostics()
@@ -51,6 +61,13 @@ M.user = {
         require("telescope.builtin").git_commits()
       end,
       "find diagnostic",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>fp"] = {
+      function()
+        require'telescope'.extensions.projects.projects{}
+      end,
+      "find projects",
       opts = { noremap = true, silent = true },
     },
   },
@@ -66,6 +83,7 @@ M.term = {
         end
       end,
       "open Lazygit",
+      opts = { noremap = true, silent = true },
     },
   },
 }
