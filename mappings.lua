@@ -50,23 +50,12 @@ M.diagnostics = {
 M.telescope = {
   n = {
     ["<leader>fd"] = {
-      function()
-        require("telescope.builtin").diagnostics()
-      end,
-      "find diagnostic",
-      opts = { noremap = true, silent = true },
-    },
-    ["<leader>fg"] = {
-      function()
-        require("telescope.builtin").git_commits()
-      end,
+      "<cmd> Telescope diagnostics <CR>",
       "find diagnostic",
       opts = { noremap = true, silent = true },
     },
     ["<leader>fp"] = {
-      function()
-        require'telescope'.extensions.projects.projects{}
-      end,
+      "<cmd> Telescope projects <CR>",
       "find projects",
       opts = { noremap = true, silent = true },
     },
