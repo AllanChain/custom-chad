@@ -18,6 +18,8 @@ local servers = {
   "astro",
   "volar",
   "svelte",
+  "jsonls",
+  "emmet_ls",
 }
 
 for _, lsp in ipairs(servers) do
