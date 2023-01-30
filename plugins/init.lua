@@ -105,6 +105,9 @@ return {
         indent = {
           enable = false,
         },
+        matchup = {
+          enable = true,
+        },
       }
     end,
   },
@@ -145,6 +148,11 @@ return {
   ["tpope/vim-surround"] = {}, -- easy change surroundings
   ["yioneko/nvim-yati"] = { -- better indent than treesitter
     requires = "nvim-treesitter/nvim-treesitter",
+  },
+  ["andymass/vim-matchup"] = {
+    setup = function()
+      vim.g.matchup_matchparen_enabled = false
+    end,
   },
   ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
     config = function()
