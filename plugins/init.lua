@@ -147,6 +147,7 @@ return {
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
   ["yioneko/nvim-yati"] = { -- better indent than treesitter
+    event = "BufReadPost",
     requires = "nvim-treesitter/nvim-treesitter",
   },
   ["andymass/vim-matchup"] = {
