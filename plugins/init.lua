@@ -221,13 +221,6 @@ return {
   ["wakatime/vim-wakatime"] = { -- Wakatime integration
     after = "nvim-lspconfig",
   },
-  ["CRAG666/code_runner.nvim"] = { -- Quickly run script inside vim
-    requires = "nvim-lua/plenary.nvim",
-    after = "nvim-lspconfig",
-    config = function()
-      require "custom.plugins.code_runner"
-    end,
-  },
   ["akinsho/toggleterm.nvim"] = {
     tag = "*",
     config = function()

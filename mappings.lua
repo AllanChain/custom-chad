@@ -11,11 +11,6 @@ M.user = {
     ["jk"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
   },
   n = {
-    ["<leader>rf"] = {
-      ":w<CR>:RunFile<CR>",
-      "run file",
-      opts = { noremap = true, silent = false },
-    },
     ["<leader>qq"] = { ":q<CR>", "close window" },
     ["<leader>qa"] = { ":qa<CR>", "close all" },
     ["<leader>sr"] = {
@@ -73,6 +68,22 @@ M.term = {
       end,
       "open Lazygit",
       opts = { noremap = true, silent = true },
+    },
+    ["<leader>rf"] = {
+      function()
+        local run = require "custom.integrations.run_file"
+        if not run then
+          return
+        end
+        run.run_file {
+          filename = vim.fn.expand "%",
+          num = 10,
+          direction = 'horizontal',
+          size = 10,
+        }
+      end,
+      "run file",
+      opts = { noremap = true, silent = false },
     },
   },
 }
