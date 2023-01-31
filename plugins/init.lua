@@ -150,6 +150,7 @@ return {
     requires = "nvim-treesitter/nvim-treesitter",
   },
   ["andymass/vim-matchup"] = {
+    event = "BufReadPost",
     setup = function()
       vim.g.matchup_matchparen_enabled = false
     end,
