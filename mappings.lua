@@ -54,6 +54,20 @@ M.telescope = {
       "find projects",
       opts = { noremap = true, silent = true },
     },
+    ["<leader>fF"] = {
+      function()
+        require("telescope.builtin").find_files {
+          no_ignore = true,
+          hidden = true,
+          file_ignore_patterns = {
+            "node_modules/",
+            "__pycache__/",
+          },
+        }
+      end,
+      "find files (no ignore)",
+      opts = { noremap = true, silent = true },
+    },
   },
 }
 
@@ -78,7 +92,7 @@ M.term = {
         run.run_file {
           filename = vim.fn.expand "%",
           num = 10,
-          direction = 'horizontal',
+          direction = "horizontal",
           size = 10,
         }
       end,
