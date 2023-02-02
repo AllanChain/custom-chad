@@ -30,7 +30,9 @@ for _, lsp in ipairs(servers) do
 end
 
 lspconfig.tsserver.setup {
-  on_attach = function(client, _)
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
     client.server_capabilities.document_formatting = false
   end,
 }
