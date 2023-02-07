@@ -45,15 +45,14 @@ end
 local function create_run_condition(name, pattern)
   return function(params)
     local root = params.root or utils.get_root()
-    local bufnr = params.bufnr
-    if cond_cache[bufnr] == nil then
-      cond_cache[bufnr] = {}
+    if cond_cache[root] == nil then
+      cond_cache[root] = {}
     end
-    if cond_cache[bufnr][name] ~= nil then
-      return cond_cache[bufnr][name]
+    if cond_cache[root][name] ~= nil then
+      return cond_cache[root][name]
     end
     local enabled = match_pattern(root, pattern)
-    cond_cache[bufnr][name] = enabled
+    cond_cache[root][name] = enabled
     return enabled
   end
 end
