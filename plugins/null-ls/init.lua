@@ -59,34 +59,66 @@ local function create_run_condition(name, pattern)
 end
 
 local sources = {
-  b.formatting.isort.with { extra_args = { "--profile=black" } },
-  b.formatting.black,
-  b.diagnostics.mypy,
-  b.diagnostics.flake8.with { extra_args = { "--max-line-length=88" } },
-  b.diagnostics.pydocstyle.with {
-    extra_args = { "--ignore=D1" },
-    runtime_condition = create_run_condition("pydocstyle", {
-      ".pydocstyle",
-      { read = "pyproject.toml", find = "pydocstyle" },
+  --[[#########################
+  --           Python
+  --#########################]]
+  b.formatting.isort.with {
+    runtime_condition = create_run_condition("isort", {
+      ".isort.cfg",
+      { read = "pyproject.toml", find = "%[tool.isort%]" },
     }),
   },
-  b.formatting.shfmt,
-  b.diagnostics.shellcheck,
+  b.formatting.black,
+  b.diagnostics.mypy.with {
+    runtime_condition = create_run_condition("mypy", {
+      ".mypy.ini",
+      { read = "pyproject.toml", find = "%[tool.mypy%]" },
+    }),
+  },
+  b.diagnostics.flake8.with {
+    runtime_condition = create_run_condition("flake8", ".flake8"),
+  },
+  b.diagnostics.pydocstyle.with {
+    runtime_condition = create_run_condition("pydocstyle", {
+      ".pydocstyle",
+      { read = "pyproject.toml", find = "%[tool.pydocstyle%]" },
+    }),
+  },
+  b.diagnostics.ruff.with {
+    runtime_condition = create_run_condition("ruff", {
+      { read = "pyproject.toml", find = "%[tool.ruff%]" },
+    }),
+  },
+  --[[#########################
+  --     JS, HTML, and CSS
+  --#########################]]
   b.formatting.prettier.with {
+    prefer_local = "node_modules/.bin",
     runtime_condition = create_run_condition("prettier", ".prettierrc"),
   },
-  julia,
-  -- JS html css stuff
-  -- b.formatting.eslint.with {
-  --    prefer_local = "node_modules/.bin",
-  -- },
-  -- b.diagnostics.eslint.with {
-  --    prefer_local = "node_modules/.bin",
-  -- },
-
-  -- Lua
+  b.formatting.eslint.with {
+    prefer_local = "node_modules/.bin",
+    runtime_condition = create_run_condition("eslint", ".eslintrc"),
+  },
+  b.diagnostics.eslint.with {
+    prefer_local = "node_modules/.bin",
+    runtime_condition = create_run_condition("eslint", ".eslintrc"),
+  },
+  b.formatting.rome.with {
+    prefer_local = "node_modules/.bin",
+    runtime_condition = create_run_condition("rome", "rome.json"),
+  },
+  --[[#########################
+  --            Lua
+  --#########################]]
   b.formatting.stylua,
   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
+  --[[#########################
+  --       Miscellaneous
+  --#########################]]
+  b.formatting.shfmt,
+  b.diagnostics.shellcheck,
+  julia,
 }
 
 null_ls.setup {
