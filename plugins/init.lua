@@ -246,6 +246,18 @@ return {
       }
     end,
   },
+  ["akinsho/git-conflict.nvim"] = {
+    config = function()
+      local ok, gc = pcall(require, "git-conflict")
+      if not ok then
+        return
+      end
+      gc.setup {
+        default_mappings = false,
+        disable_diagnostics = true,
+      }
+    end,
+  },
 }
 -- return {
 --    {
