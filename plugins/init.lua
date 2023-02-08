@@ -44,6 +44,7 @@ return {
         "astro-language-server",
         "emmet-ls",
         "json-lsp",
+        "eslint_d",
         "pyright",
         "black",
         "mypy",

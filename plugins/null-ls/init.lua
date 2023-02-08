@@ -95,12 +95,13 @@ local sources = {
     prefer_local = "node_modules/.bin",
     runtime_condition = create_run_condition("prettier", ".prettierrc"),
   },
-  b.formatting.eslint.with {
-    prefer_local = "node_modules/.bin",
+  b.formatting.eslint_d.with {
     runtime_condition = create_run_condition("eslint", ".eslintrc"),
   },
-  b.diagnostics.eslint.with {
-    prefer_local = "node_modules/.bin",
+  b.diagnostics.eslint_d.with {
+    runtime_condition = create_run_condition("eslint", ".eslintrc"),
+  },
+  b.code_actions.eslint_d.with {
     runtime_condition = create_run_condition("eslint", ".eslintrc"),
   },
   b.formatting.rome.with {
@@ -121,5 +122,6 @@ local sources = {
 }
 
 null_ls.setup {
+  -- debug = true,
   sources = sources,
 }
