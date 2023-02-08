@@ -152,8 +152,8 @@ function M.shortcuts()
         hl = {
           { "String", 1, 20 },
           { "Keyword", 20, 38 },
-          { "Function", 38, 60 },
-          { "Constant", 60, 80 },
+          { "Function", 38, 58 },
+          { "Constant", 58, 70 },
         },
       },
     },
