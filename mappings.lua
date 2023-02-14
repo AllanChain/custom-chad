@@ -19,6 +19,10 @@ M.user = {
       end,
       "structural replace",
     },
+    ["<leader>o"] = { "<Plug>OSCYank", "OSC yank" },
+  },
+  v = {
+    ["<leader>o"] = { ":OSCYank<CR>", "OSC yank" },
   },
 }
 

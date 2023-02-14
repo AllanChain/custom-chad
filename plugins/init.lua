@@ -146,6 +146,7 @@ return {
   ========================================================]]
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
+  ["ojroques/vim-oscyank"] = {}, -- yank contents over SSH
   ["yioneko/nvim-yati"] = { -- better indent than treesitter
     event = "BufReadPost",
     requires = "nvim-treesitter/nvim-treesitter",
