@@ -137,6 +137,13 @@ return {
   },
   ["neovim/nvim-lspconfig"] = {
     config = function()
+      local ok, neodev = pcall(require, "neodev")
+      -- Neodev should be set up before lspconfig
+      if ok then
+        neodev.setup {
+          setup_jsonls = false,
+        }
+      end
       require "plugins.configs.lspconfig"
       require "custom.plugins.lspconfig"
     end,
@@ -224,6 +231,7 @@ return {
   ["wakatime/vim-wakatime"] = { -- Wakatime integration
     after = "nvim-lspconfig",
   },
+  ["folke/neodev.nvim"] = {}, -- Neovim config intellisense. See lspconfig setup
   ["akinsho/toggleterm.nvim"] = {
     tag = "*",
     config = function()
