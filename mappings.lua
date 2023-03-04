@@ -46,6 +46,25 @@ M.diagnostics = {
   },
 }
 
+M.dap = {
+  n = {
+    ["<leader>dc"] = {
+      function()
+        require("dap").continue()
+      end,
+      "DAP continue",
+      opts = { noremap = true, silent = true },
+    },
+    ["<leader>db"] = {
+      function()
+        require("dap").toggle_breakpoint()
+      end,
+      "DAP breakpoint",
+      opts = { noremap = true, silent = true },
+    },
+  },
+}
+
 M.telescope = {
   n = {
     ["<leader>fd"] = {
@@ -113,7 +132,7 @@ M.git_conflict = {
     ["<leader>cb"] = { "<Plug>(git-conflict-both)", "use both", opts = { noremap = true, silent = true } },
     ["<leader>cn"] = { "<Plug>(git-conflict-none)", "use none", opts = { noremap = true, silent = true } },
     ["]x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict", opts = { noremap = true, silent = true } },
-    ["[x]"] = { "<Plug>(git-conflict-next-conflict)", "next conflict", opts = { noremap = true, silent = true } },
+    ["[x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict", opts = { noremap = true, silent = true } },
   },
 }
 
