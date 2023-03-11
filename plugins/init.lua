@@ -153,7 +153,17 @@ return {
   ========================================================]]
   ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
   ["tpope/vim-surround"] = {}, -- easy change surroundings
-  ["ojroques/vim-oscyank"] = {}, -- yank contents over SSH
+  ["ojroques/nvim-osc52"] = { -- yank contents over SSH
+    config = function()
+      local ok, osc52 = pcall(require, "osc52")
+      if not ok then
+        return
+      end
+      osc52.setup {
+        silent = true,
+      }
+    end,
+  },
   ["yioneko/nvim-yati"] = { -- better indent than treesitter
     event = "BufReadPost",
     requires = "nvim-treesitter/nvim-treesitter",
