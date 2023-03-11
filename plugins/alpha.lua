@@ -60,7 +60,7 @@ function M.recent_projects(start, target_width)
     if stat ~= nil and stat.type == "directory" then
       added_projects = added_projects + 1
       local shortcut = tostring(added_projects)
-      local display_path = " " .. project_path:gsub(vim.env.HOME, "~")
+      local display_path = project_path:gsub(vim.env.HOME, "~")
       local path_ok, plenary_path = pcall(require, "plenary.path")
       if #display_path > target_width and path_ok then
         display_path = plenary_path.new(display_path):shorten(1, { -2, -1 })
@@ -70,15 +70,15 @@ function M.recent_projects(start, target_width)
       end
       buttons[added_projects] = {
         type = "button",
-        val = display_path,
+        val = " " .. display_path,
         on_press = function()
           M.open_project(project_path)
         end,
         opts = {
           position = "center",
           shortcut = shortcut,
-          cursor = target_width,
-          width = target_width,
+          cursor = target_width + 3,
+          width = target_width + 3,
           align_shortcut = "right",
           hl_shortcut = "Keyword",
           hl = { { "Number", 1, 3 } },
