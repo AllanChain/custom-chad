@@ -125,7 +125,7 @@ return {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "InsertEnter",
+    event = "BufReadPost",
     config = function()
       require "custom.configs.null-ls"
     end,
