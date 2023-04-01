@@ -113,12 +113,14 @@ M.section_projects = {
 
 function M.info_text()
   ---@diagnostic disable-next-line:undefined-field
-  local total_plugins = #vim.tbl_keys(_G.packer_plugins)
+  local lazy_stats = require("lazy").stats()
+  local total_plugins = " " .. lazy_stats.loaded .. "/" .. lazy_stats.count
+  total_plugins = total_plugins .. " in " .. lazy_stats.startuptime .. " ms"
   local datetime = os.date " %Y-%m-%d   %A"
   local version = vim.version()
   local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
-  return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+  return datetime .. "  " .. total_plugins .. nvim_version_info
 end
 
 M.section_info = {
