@@ -11,7 +11,7 @@ M.lazy = function(install_path)
 
   M.echo "  Compiling base46 theme to bytecode ..."
 
-  local base46_repo = "https://ghproxy.com/github.com/NvChad/base46"
+  local base46_repo = "https://ghproxy.com/github.com/NvChad/base46.git"
   vim.fn.system { "git", "clone", "--depth", "1", "-b", "v2.0", base46_repo, lazy_path }
   vim.opt.rtp:prepend(lazy_path)
 
