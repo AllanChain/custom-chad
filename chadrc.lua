@@ -1,10 +1,9 @@
 local M = {}
-M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 
-M.mappings = require("custom.mappings")
+M.mappings = require "custom.mappings"
 
 M.ui = {
-	theme = "onedark",
+  theme = "onenord",
 }
 
 M.plugins = "custom.plugins"
