@@ -376,4 +376,15 @@ return {
       },
     },
   },
+  { -- Dim unused vars
+    "zbirenbaum/neodim",
+    event = "LspAttach",
+    opts = {
+      alpha = 0.5,
+      blend_color = "#2e3440",
+    },
+    config = function(_, opts)
+      require("neodim").setup(opts)
+    end,
+  },
 }
