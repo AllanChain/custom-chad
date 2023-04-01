@@ -85,7 +85,7 @@ function M.recent_projects(start, target_width)
           keymap = {
             "n",
             shortcut,
-            "<cmd>lua require('custom.plugins.alpha').open_project('" .. project_path .. "')<CR>",
+            "<cmd>lua require('custom.configs.alpha').open_project('" .. project_path .. "')<CR>",
             { noremap = true, silent = true, nowait = true },
           },
         },
