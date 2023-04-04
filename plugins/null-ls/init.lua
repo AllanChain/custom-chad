@@ -65,22 +65,33 @@ local sources = {
     runtime_condition = create_run_condition("isort", {
       ".isort.cfg",
       { read = "pyproject.toml", find = "%[tool.isort%]" },
+      { read = "setup.cfg", find = "isort" },
     }),
   },
-  b.formatting.black,
+  b.formatting.black.with {
+    runtime_condition = create_run_condition("black", {
+      { read = "pyproject.toml", find = "%[tool.black%]" },
+      { read = "setup.cfg", find = "black" },
+    }),
+  },
   b.diagnostics.mypy.with {
     runtime_condition = create_run_condition("mypy", {
       ".mypy.ini",
       { read = "pyproject.toml", find = "%[tool.mypy%]" },
+      { read = "setup.cfg", find = "mypy" },
     }),
   },
   b.diagnostics.flake8.with {
-    runtime_condition = create_run_condition("flake8", ".flake8"),
+    runtime_condition = create_run_condition("flake8", {
+      ".flake8",
+      { read = "setup.cfg", find = "flake8" },
+    }),
   },
   b.diagnostics.pydocstyle.with {
     runtime_condition = create_run_condition("pydocstyle", {
       ".pydocstyle",
       { read = "pyproject.toml", find = "%[tool.pydocstyle%]" },
+      { read = "setup.cfg", find = "pycodestyle" },
     }),
   },
   b.diagnostics.ruff.with {
@@ -88,6 +99,7 @@ local sources = {
       { read = "pyproject.toml", find = "%[tool.ruff%]" },
     }),
   },
+  b.formatting.autopep8,
   --[[#########################
   --     JS, HTML, and CSS
   --#########################]]
