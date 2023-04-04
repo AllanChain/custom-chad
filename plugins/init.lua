@@ -390,4 +390,8 @@ return {
     "h-hg/fcitx.nvim",
     event = "BufReadPost",
   },
+  { -- global search and replace
+    "nvim-pack/nvim-spectre",
+    cmd = "Spectre",
+  }
 }
