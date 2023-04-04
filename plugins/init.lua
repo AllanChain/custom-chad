@@ -386,4 +386,8 @@ return {
       require("neodim").setup(opts)
     end,
   },
+  {
+    "h-hg/fcitx.nvim",
+    event = "BufReadPost",
+  },
 }
