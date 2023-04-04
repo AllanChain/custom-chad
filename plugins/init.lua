@@ -2,37 +2,28 @@ return {
   --[[======================================================
                 Configure builtin plugins
   ========================================================]]
-  ["folke/which-key.nvim"] = {
-    disable = false,
-    module = "which-key",
-    keys = { "<leader>", '"', "'", "`", "g" },
-  },
-  ["wbthomason/packer.nvim"] = {
-    override_options = {
-      git = {
-        default_url_format = "https://ghproxy.com/github.com/%s.git",
-      },
-    },
-  },
-  ["NvChad/nvterm"] = false,
-  ["nvim-telescope/telescope.nvim"] = {
+  { "NvChad/nvterm", enabled = false },
+  {
+    "nvim-telescope/telescope.nvim",
     ft = { "alpha" },
-    override_options = {
+    opts = {
       extensions_list = { "themes", "projects" },
     },
   },
-  ["goolord/alpha-nvim"] = {
-    disable = false,
+  {
+    "goolord/alpha-nvim",
+    event = "VimEnter",
     config = function()
       local has_alpha, alpha = pcall(require, "alpha")
       if not has_alpha then
         return
       end
-      alpha.setup(require("custom.plugins.alpha").config)
+      alpha.setup(require("custom.configs.alpha").config)
     end,
   },
-  ["williamboman/mason.nvim"] = {
-    override_options = {
+  {
+    "williamboman/mason.nvim",
+    opts = {
       ensure_installed = {
         "lua-language-server",
         "stylua",
@@ -59,15 +50,13 @@ return {
       },
     },
   },
-  ["nvim-treesitter/nvim-treesitter"] = {
+  {
+    "nvim-treesitter/nvim-treesitter",
     -- Overriding whole config function to enable ghproxy
-    config = function()
+    config = function(_, opts)
       -- copied from NvChad config
-      local ok, base46 = pcall(require, "base46")
-      if not ok then
-        return
-      end
-      base46.load_highlight "treesitter"
+      dofile(vim.g.base46_cache .. "syntax")
+      require("nvim-treesitter.configs").setup(opts)
 
       -- change install url of parsers to ghproxy
       ---@diagnostic disable-next-line:redefined-local
@@ -112,8 +101,9 @@ return {
       }
     end,
   },
-  ["nvim-tree/nvim-tree.lua"] = {
-    override_options = {
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = {
       sync_root_with_cwd = true,
       respect_buf_cwd = true,
       update_focused_file = {
@@ -126,16 +116,22 @@ return {
       },
     },
   },
-  ["hrsh7th/nvim-cmp"] = {
-    override_options = require "custom.plugins.cmp",
+  {
+    "hrsh7th/nvim-cmp",
+    opts = require "custom.configs.cmp",
+    dependencies = {
+      { "kdheepak/cmp-latex-symbols" }, -- add unicode math completion
+    },
   },
-  ["jose-elias-alvarez/null-ls.nvim"] = {
-    after = "nvim-lspconfig",
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "BufReadPost",
     config = function()
-      require "custom.plugins.null-ls"
+      require "custom.configs.null-ls"
     end,
   },
-  ["neovim/nvim-lspconfig"] = {
+  {
+    "neovim/nvim-lspconfig",
     config = function()
       local ok, neodev = pcall(require, "neodev")
       -- Neodev should be set up before lspconfig
@@ -145,15 +141,41 @@ return {
         }
       end
       require "plugins.configs.lspconfig"
-      require "custom.plugins.lspconfig"
+      require "custom.configs.lspconfig"
     end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    opts = {
+      filetype_exclude = {
+        "help",
+        "terminal",
+        "lazy",
+        "lspinfo",
+        "TelescopePrompt",
+        "TelescopeResults",
+        "mason",
+        "nvdash",
+        "nvcheatsheet",
+        "alpha",
+        "",
+      },
+    },
   },
   --[[======================================================
                       My custom plugins
   ========================================================]]
-  ["tpope/vim-sleuth"] = {}, -- auto adjust shiftwidth
-  ["tpope/vim-surround"] = {}, -- easy change surroundings
-  ["ojroques/nvim-osc52"] = { -- yank contents over SSH
+  { -- auto adjust shiftwidth
+    "tpope/vim-sleuth",
+    event = "BufReadPost",
+  },
+  { -- easy change surroundings
+    "tpope/vim-surround",
+    event = "BufReadPost",
+  },
+  {
+    "ojroques/nvim-osc52", -- yank contents over SSH
+    event = "BufReadPost",
     config = function()
       local ok, osc52 = pcall(require, "osc52")
       if not ok then
@@ -164,17 +186,21 @@ return {
       }
     end,
   },
-  ["yioneko/nvim-yati"] = { -- better indent than treesitter
+  {
+    "yioneko/nvim-yati", -- better indent than treesitter
     event = "BufReadPost",
     requires = "nvim-treesitter/nvim-treesitter",
   },
-  ["andymass/vim-matchup"] = {
+  {
+    "andymass/vim-matchup",
     event = "BufReadPost",
     setup = function()
       vim.g.matchup_matchparen_enabled = false
     end,
   },
-  ["ethanholz/nvim-lastplace"] = { -- remember cursor positions
+  {
+    "ethanholz/nvim-lastplace", -- remember cursor positions
+    event = "BufReadPost",
     config = function()
       local ok, lastplace = pcall(require, "nvim-lastplace")
       if not ok then
@@ -183,7 +209,9 @@ return {
       lastplace.setup {}
     end,
   },
-  ["folke/todo-comments.nvim"] = { -- NOTE: fancy TODO comment
+  {
+    "folke/todo-comments.nvim", -- NOTE: fancy TODO comment
+    event = "BufReadPost",
     config = function()
       local ok, comments = pcall(require, "todo-comments")
       if not ok then
@@ -192,7 +220,9 @@ return {
       comments.setup {}
     end,
   },
-  ["ggandor/leap.nvim"] = { -- s{char1}{char2} fast navigation
+  {
+    "ggandor/leap.nvim", -- s{char1}{char2} fast navigation
+    event = "BufReadPost",
     config = function()
       local ok, leap = pcall(require, "leap")
       if not ok then
@@ -201,8 +231,14 @@ return {
       leap.add_default_mappings(true)
     end,
   },
-  ["JuliaEditorSupport/julia-vim"] = {},
-  ["ahmedkhalf/project.nvim"] = { -- auto cd into project root
+  {
+    "JuliaEditorSupport/julia-vim",
+    lazy = false,
+    ft = { "julia" },
+  },
+  {
+    "ahmedkhalf/project.nvim", -- auto cd into project root
+    event = "VimEnter",
     config = function()
       local ok, project = pcall(require, "project_nvim")
       if not ok then
@@ -214,7 +250,9 @@ return {
       }
     end,
   },
-  ["Pocco81/auto-save.nvim"] = { -- auto save
+  {
+    "Pocco81/auto-save.nvim", -- auto save
+    event = "BufReadPost",
     config = function()
       local ok, autosave = pcall(require, "auto-save")
       if not ok then
@@ -234,16 +272,21 @@ return {
       }
     end,
   },
-  ["cshuaimin/ssr.nvim"] = {}, -- structural search and replace
-  ["kdheepak/cmp-latex-symbols"] = { -- add unicode math completion
-    after = "nvim-cmp",
+  { -- structural search and replace
+    "cshuaimin/ssr.nvim",
+    event = "BufReadPost",
   },
-  ["wakatime/vim-wakatime"] = { -- Wakatime integration
-    after = "nvim-lspconfig",
+  { -- Wakatime integration
+    "wakatime/vim-wakatime",
+    event = "VimEnter",
   },
-  ["folke/neodev.nvim"] = {}, -- Neovim config intellisense. See lspconfig setup
-  ["akinsho/toggleterm.nvim"] = {
-    tag = "*",
+  { -- Neovim config intellisense. See lspconfig setup
+    "folke/neodev.nvim",
+  },
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    event = "VimEnter",
     config = function()
       local ok, toggleterm = pcall(require, "toggleterm")
       if not ok then
@@ -266,7 +309,9 @@ return {
       }
     end,
   },
-  ["akinsho/git-conflict.nvim"] = {
+  {
+    "akinsho/git-conflict.nvim",
+    event = "BufReadPost",
     config = function()
       local ok, gc = pcall(require, "git-conflict")
       if not ok then
@@ -278,63 +323,68 @@ return {
       }
     end,
   },
-  ["rcarriga/nvim-dap-ui"] = {
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      local ui_ok, dapui = pcall(require, "dapui")
-      local dap_ok, dap = pcall(require, "dap")
-      if not ui_ok and dap_ok then
-        return
-      end
-      vim.fn.sign_define("DapBreakpoint", {
-        text = "",
-        texthl = "DiagnosticSignError",
-        linehl = "",
-        numhl = "",
-      })
-      dapui.setup {}
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-      end
-    end,
+  {
+    "mfussenegger/nvim-dap",
+    event = "BufReadPost",
+    dependencies = {
+      {
+        "rcarriga/nvim-dap-ui",
+        config = function()
+          local ui_ok, dapui = pcall(require, "dapui")
+          local dap_ok, dap = pcall(require, "dap")
+          if not ui_ok and dap_ok then
+            return
+          end
+          vim.fn.sign_define("DapBreakpoint", {
+            text = "",
+            texthl = "DiagnosticSignError",
+            linehl = "",
+            numhl = "",
+          })
+          dapui.setup {}
+          dap.listeners.after.event_initialized["dapui_config"] = function()
+            dapui.open()
+          end
+          dap.listeners.before.event_terminated["dapui_config"] = function()
+            dapui.close()
+          end
+          dap.listeners.before.event_exited["dapui_config"] = function()
+            dapui.close()
+          end
+        end,
+      },
+      {
+        "theHamsta/nvim-dap-virtual-text",
+        config = function()
+          local ok, dap_text = pcall(require, "nvim-dap-virtual-text")
+          if not ok then
+            return
+          end
+          dap_text.setup {}
+        end,
+      },
+      {
+        "mfussenegger/nvim-dap-python",
+        requires = { "mfussenegger/nvim-dap" },
+        config = function()
+          local ok, dap_python = pcall(require, "dap-python")
+          if not ok then
+            return
+          end
+          dap_python.setup()
+        end,
+      },
+    },
   },
-  ["theHamsta/nvim-dap-virtual-text"] = {
-    config = function()
-      local ok, dap_text = pcall(require, "nvim-dap-virtual-text")
-      if not ok then
-        return
-      end
-      dap_text.setup {}
-    end,
-  },
-  ["mfussenegger/nvim-dap-python"] = {
-    requires = { "mfussenegger/nvim-dap" },
-    config = function()
-      local ok, dap_python = pcall(require, "dap-python")
-      if not ok then
-        return
-      end
-      dap_python.setup()
+  { -- Dim unused vars
+    "zbirenbaum/neodim",
+    event = "LspAttach",
+    opts = {
+      alpha = 0.5,
+      blend_color = "#2e3440",
+    },
+    config = function(_, opts)
+      require("neodim").setup(opts)
     end,
   },
 }
--- return {
---    {
---       "NoahTheDuke/vim-just",
---       after = "nvim-lspconfig",
---    },
---    {
---       "IndianBoy42/tree-sitter-just",
---       ft = { "just" },
---       after = "nvim-lspconfig",
---       -- config = function()
---       --    require("tree-sitter-just").setup()
---       -- end,
---    },
--- }

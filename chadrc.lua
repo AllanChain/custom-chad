@@ -1,13 +1,16 @@
 local M = {}
-M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 
-M.mappings = require("custom.mappings")
+M.mappings = require "custom.mappings"
 
 M.ui = {
-	transparency = true,
-	theme = "doomchad",
+  theme = "onenord",
 }
 
-M.plugins = require "custom.plugins"
+M.plugins = "custom.plugins"
+M.lazy_nvim = {
+  git = {
+    url_format = "https://ghproxy.com/github.com/%s.git",
+  },
+}
 
 return M

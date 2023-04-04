@@ -6,7 +6,7 @@ end
 
 local utils = require "null-ls.utils"
 
-local julia = require "custom.plugins.null-ls.julia"
+local julia = require "custom.configs.null-ls.julia"
 
 local b = null_ls.builtins
 
