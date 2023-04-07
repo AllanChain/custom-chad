@@ -262,7 +262,20 @@ return {
         return
       end
       local utils = require "auto-save.utils.data"
+      vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
+        group = "AutoSave",
+        pattern = "*",
+        callback = function()
+          local msg = "Saved at " .. vim.fn.strftime "%H:%M:%S"
+          vim.notify(msg, "info", { timeout = 200, title = "AutoSave" })
+        end,
+      })
       autosave.setup {
+        execution_message = {
+          message = function()
+            return ""
+          end,
+        },
         condition = function(buf)
           if vim.fn.getcwd():match "nvim/lua/custom" then
             return false
