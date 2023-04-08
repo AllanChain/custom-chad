@@ -254,7 +254,8 @@ return {
     end,
   },
   {
-    "Pocco81/auto-save.nvim", -- auto save
+    "zoriya/auto-save.nvim", -- auto save
+    -- using the fork until https://github.com/Pocco81/auto-save.nvim/pull/67
     event = "BufReadPost",
     config = function()
       local ok, autosave = pcall(require, "auto-save")
@@ -262,18 +263,16 @@ return {
         return
       end
       local utils = require "auto-save.utils.data"
-      vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
-        group = "AutoSave",
-        pattern = "*",
-        callback = function()
-          local msg = "Saved at " .. vim.fn.strftime "%H:%M:%S"
-          vim.notify(msg, "info", { timeout = 200, title = "AutoSave" })
-        end,
-      })
       autosave.setup {
-        execution_message = {
-          message = function()
-            return ""
+        print_enabled = false,
+        callbacks = {
+          after_saving = function()
+            local msg = "Saved at " .. vim.fn.strftime "%H:%M:%S"
+            vim.notify(msg, "info", {
+              timeout = 100,
+              title = "AutoSave",
+              render = "compact",
+            })
           end,
         },
         condition = function(buf)
