@@ -11,8 +11,9 @@ M.user = {
     ["jk"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
   },
   n = {
-    ["<leader>qq"] = { ":q<CR>", "close window" },
-    ["<leader>qa"] = { ":qa<CR>", "close all" },
+    ["<Esc>"] = { ":noh <CR>", "clear highlights", opts = { silent = true } },
+    ["<leader>qq"] = { ":q<CR>", "close window", opts = { silent = true } },
+    ["<leader>qa"] = { ":qa<CR>", "close all", opts = { silent = true } },
     ["<leader>sr"] = {
       function()
         require("ssr").open()
