@@ -1,4 +1,4 @@
-local has_project, project = pcall(require, "project_nvim")
+local has_project, project_history = pcall(require, "project_nvim.utils.history")
 
 local M = {}
 
@@ -48,7 +48,8 @@ function M.recent_projects(start, target_width)
     return require("alpha.themes.theta").mru(start, vim.fn.getcwd())
   end
   local buttons = {}
-  local project_paths = project.get_recent_projects()
+  project_history.read_projects_from_history()
+  local project_paths = project_history.get_recent_projects()
   local added_projects = 0
   -- most recent project is the last
   for i = #project_paths, 1, -1 do
