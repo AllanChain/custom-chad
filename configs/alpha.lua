@@ -48,7 +48,6 @@ function M.recent_projects(start, target_width)
     return require("alpha.themes.theta").mru(start, vim.fn.getcwd())
   end
   local buttons = {}
-  project_history.read_projects_from_history()
   local project_paths = project_history.get_recent_projects()
   local added_projects = 0
   -- most recent project is the last

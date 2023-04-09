@@ -241,7 +241,7 @@ return {
   },
   {
     "ahmedkhalf/project.nvim", -- auto cd into project root
-    event = "VimEnter",
+    lazy = false,
     config = function()
       local ok, project = pcall(require, "project_nvim")
       if not ok then
