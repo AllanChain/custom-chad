@@ -99,7 +99,12 @@ local sources = {
       { read = "pyproject.toml", find = "%[tool.ruff%]" },
     }),
   },
-  b.formatting.autopep8,
+  b.formatting.autopep8.with {
+    runtime_condition = function (params)
+      local root = params.root or utils.get_root()
+      return not cond_cache[root].black
+    end
+  },
   --[[#########################
   --     JS, HTML, and CSS
   --#########################]]
