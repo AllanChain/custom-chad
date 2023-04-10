@@ -4,6 +4,19 @@ return {
   ========================================================]]
   { "NvChad/nvterm", enabled = false },
   {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      filetypes = {
+        "css",
+        "javascript",
+        "html",
+        "vue",
+        "svelte",
+        "astro",
+      },
+    },
+  },
+  {
     "nvim-telescope/telescope.nvim",
     ft = { "alpha" },
     opts = {
