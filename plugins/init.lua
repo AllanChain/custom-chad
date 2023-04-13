@@ -205,12 +205,11 @@ return {
   {
     "yioneko/nvim-yati", -- better indent than treesitter
     event = "BufReadPost",
-    requires = "nvim-treesitter/nvim-treesitter",
   },
   {
     "andymass/vim-matchup",
     event = "BufReadPost",
-    setup = function()
+    init = function()
       vim.g.matchup_matchparen_enabled = false
     end,
   },
@@ -410,7 +409,6 @@ return {
       },
       {
         "mfussenegger/nvim-dap-python",
-        requires = { "mfussenegger/nvim-dap" },
         config = function()
           local ok, dap_python = pcall(require, "dap-python")
           if not ok then
