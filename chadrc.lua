@@ -3,6 +3,10 @@ local M = {}
 M.mappings = require "custom.mappings"
 
 M.ui = {
+  hl_add = {
+    ConflictCurrent = { bg = "light_bg" },
+    ConflictIncoming = { bg = "one_bg" },
+  },
   theme = "onenord",
   statusline = {
     overriden_modules = function()
