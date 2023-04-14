@@ -23,10 +23,13 @@ local servers = {
 }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  local executable = lspconfig[lsp].document_config.default_config.cmd[1]
+  if vim.fn.executable(executable) ~= 0 then
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end
 end
 
 lspconfig.tsserver.setup {
