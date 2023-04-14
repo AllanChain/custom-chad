@@ -21,6 +21,18 @@ return {
     ft = { "alpha" },
     opts = {
       extensions_list = { "themes", "projects" },
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-Up>"] = function(bufnr)
+              require("telescope.actions").cycle_history_prev(bufnr)
+            end,
+            ["<C-Down>"] = function(bufnr)
+              require("telescope.actions").cycle_history_next(bufnr)
+            end,
+          },
+        },
+      },
     },
   },
   {
