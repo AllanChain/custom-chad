@@ -133,6 +133,8 @@ local sources = {
   --[[#########################
   --       Miscellaneous
   --#########################]]
+  b.formatting.gofmt,
+  b.formatting.goimports,
   b.formatting.shfmt,
   b.diagnostics.shellcheck,
   julia,

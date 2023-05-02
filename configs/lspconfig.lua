@@ -20,6 +20,7 @@ local servers = {
   "svelte",
   "jsonls",
   "emmet_ls",
+  "gopls",
 }
 
 for _, lsp in ipairs(servers) do
