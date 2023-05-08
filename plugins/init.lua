@@ -135,7 +135,20 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    opts = require "custom.configs.cmp",
+    config = function(_, opts)
+      local cmp = require "cmp"
+      cmp.setup(opts)
+      cmp.setup.filetype({ "julia", "latex" }, {
+        sources = {
+          {
+            name = "latex_symbols",
+            option = {
+              strategy = 0, -- mixed
+            },
+          },
+        },
+      })
+    end,
     dependencies = {
       { "kdheepak/cmp-latex-symbols" }, -- add unicode math completion
     },
