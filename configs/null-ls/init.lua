@@ -131,10 +131,14 @@ local sources = {
   b.formatting.stylua,
   b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
   --[[#########################
-  --       Miscellaneous
+  --          Golang
   --#########################]]
   b.formatting.gofmt,
   b.formatting.goimports,
+  b.diagnostics.staticcheck,
+  --[[#########################
+  --       Miscellaneous
+  --#########################]]
   b.formatting.shfmt,
   b.diagnostics.shellcheck,
   julia,
