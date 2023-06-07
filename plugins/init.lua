@@ -188,7 +188,7 @@ return {
         "nvdash",
         "nvcheatsheet",
         "alpha",
-        "noice",
+        "notify",
         "",
       },
     },
@@ -265,6 +265,20 @@ return {
     "JuliaEditorSupport/julia-vim",
     lazy = false,
     ft = { "julia" },
+  },
+  {
+    "mrded/nvim-lsp-notify",
+    event = "BufReadPre",
+    opts = {
+      icons = { done = "" },
+    },
+    config = function(_, opts)
+      opts.notify = require "notify"
+      require("lsp-notify").setup(opts)
+    end,
+    dependencies = {
+      "rcarriga/nvim-notify",
+    },
   },
   {
     "ahmedkhalf/project.nvim", -- auto cd into project root
@@ -452,39 +466,6 @@ return {
   { -- global search and replace
     "nvim-pack/nvim-spectre",
     cmd = "Spectre",
-  },
-  {
-    "folke/noice.nvim",
-    lazy = false,
-    opts = {
-      lsp = {
-        signature = { enabled = false },
-        hover = { enabled = false },
-        override = {
-          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-          ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,
-        },
-      },
-      presets = {
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
-        long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true, -- add a border to hover docs and signature help
-      },
-    },
-    config = function(_, opts)
-      require("noice").setup(opts)
-    end,
-    dependencies = {
-      {
-        "MunifTanjim/nui.nvim",
-      },
-      {
-        "rcarriga/nvim-notify",
-      },
-    },
   },
   {
     "Bekaboo/deadcolumn.nvim",
