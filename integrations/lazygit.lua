@@ -24,6 +24,6 @@ return Terminal:new {
   end,
   -- function to run on closing the terminal
   on_close = function(_)
-    vim.cmd "startinsert!"
+    vim.cmd "checktime" -- trigger auto reload after git operation
   end,
 }
