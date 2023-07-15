@@ -332,7 +332,7 @@ return {
         callbacks = {
           after_saving = function()
             local msg = "Saved at " .. vim.fn.strftime "%H:%M:%S"
-            vim.notify(msg, "info", {
+            vim.notify(msg, vim.log.levels.INFO, {
               timeout = 100,
               title = "AutoSave",
               render = "compact",
@@ -463,9 +463,9 @@ return {
       {
         "leoluz/nvim-dap-go",
         config = function()
-          require('dap-go').setup()
+          require("dap-go").setup()
         end,
-      }
+      },
     },
   },
   { -- Dim unused vars
