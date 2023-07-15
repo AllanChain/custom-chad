@@ -281,20 +281,6 @@ return {
     ft = { "julia" },
   },
   {
-    "mrded/nvim-lsp-notify",
-    event = "BufReadPre",
-    opts = {
-      icons = { done = "" },
-    },
-    config = function(_, opts)
-      opts.notify = require "notify"
-      require("lsp-notify").setup(opts)
-    end,
-    dependencies = {
-      "rcarriga/nvim-notify",
-    },
-  },
-  {
     "ahmedkhalf/project.nvim", -- auto cd into project root
     lazy = false,
     config = function()

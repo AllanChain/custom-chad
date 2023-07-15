@@ -11,9 +11,6 @@ M.ui = {
   statusline = {
     overriden_modules = function()
       return {
-        LSP_progress = function()
-          return ""
-        end,
         LSP_status = function()
           local client_names = {}
           local client_count = 0
