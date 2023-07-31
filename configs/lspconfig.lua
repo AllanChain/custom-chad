@@ -83,3 +83,16 @@ lspconfig.julials.setup {
     },
   },
 }
+
+lspconfig.texlab.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    texlab = {
+      build = {
+        onSave = true,
+        args = { "-interaction=nonstopmode", "%f" },
+      },
+    },
+  },
+}
