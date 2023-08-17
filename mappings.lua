@@ -144,8 +144,8 @@ M.git_conflict = {
     ["<leader>ct"] = { "<Plug>(git-conflict-theirs)", "use theirs", opts = { noremap = true, silent = true } },
     ["<leader>cb"] = { "<Plug>(git-conflict-both)", "use both", opts = { noremap = true, silent = true } },
     ["<leader>cn"] = { "<Plug>(git-conflict-none)", "use none", opts = { noremap = true, silent = true } },
-    ["]x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict", opts = { noremap = true, silent = true } },
-    ["[x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict", opts = { noremap = true, silent = true } },
+    ["[x"] = { "<Plug>(git-conflict-prev-conflict)", "prev conflict", opts = { noremap = true, silent = true } },
+    ["]x"] = { "<Plug>(git-conflict-next-conflict)", "next conflict", opts = { noremap = true, silent = true } },
   },
 }
 
