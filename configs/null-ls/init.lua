@@ -100,17 +100,20 @@ local sources = {
     }),
   },
   b.formatting.autopep8.with {
-    runtime_condition = function (params)
+    runtime_condition = function(params)
       local root = params.root or utils.get_root()
       return not cond_cache[root].black
-    end
+    end,
   },
   --[[#########################
   --     JS, HTML, and CSS
   --#########################]]
   b.formatting.prettier.with {
     prefer_local = "node_modules/.bin",
-    runtime_condition = create_run_condition("prettier", ".prettierrc"),
+    runtime_condition = create_run_condition("prettier", {
+      ".prettierrc",
+      { read = "package.json", find = '"prettier"' },
+    }),
   },
   b.formatting.eslint_d.with {
     runtime_condition = create_run_condition("eslint", ".eslintrc"),
