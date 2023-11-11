@@ -29,3 +29,10 @@ vim.api.nvim_create_autocmd("FocusGained", {
     vim.cmd("checktime") -- checktime triggers autoread
   end
 })
+
+-- Add new file types
+vim.filetype.add({
+  extension = {
+    qml = 'qml',
+  }
+})
