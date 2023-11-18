@@ -159,10 +159,27 @@ return {
 
           local autopairs = require "nvim-autopairs"
           local cond = require "nvim-autopairs.conds"
+          local handlers = require "nvim-autopairs.completion.handlers"
           autopairs.get_rules("'")[1]:with_pair(cond.not_filetypes { "scheme", "lisp", "clojure" })
           -- setup cmp for autopairs. Copied from NvChad
           local cmp_autopairs = require "nvim-autopairs.completion.cmp"
-          require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+          local cmp = require "cmp"
+          cmp.event:on(
+            "confirm_done",
+            cmp_autopairs.on_confirm_done {
+              filetypes = {
+                tex = {
+                  ["{"] = {
+                    kind = {
+                      cmp.lsp.CompletionItemKind.Function,
+                      cmp.lsp.CompletionItemKind.Method,
+                    },
+                    handler = handlers["*"]
+                  },
+                },
+              },
+            }
+          )
         end,
       },
     },
