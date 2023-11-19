@@ -168,15 +168,7 @@ return {
             "confirm_done",
             cmp_autopairs.on_confirm_done {
               filetypes = {
-                tex = {
-                  ["{"] = {
-                    kind = {
-                      cmp.lsp.CompletionItemKind.Function,
-                      cmp.lsp.CompletionItemKind.Method,
-                    },
-                    handler = handlers["*"]
-                  },
-                },
+                tex = false,
               },
             }
           )
