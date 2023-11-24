@@ -61,26 +61,26 @@ return {
         "shellcheck",
       },
       github = {
-        download_url_template = "https://gh-proxy.com/github.com/%s/releases/download/%s/%s",
+        download_url_template = "https://mirror.ghproxy.com/github.com/%s/releases/download/%s/%s",
       },
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    -- Overriding whole config function to enable gh-proxy
+    -- Overriding whole config function to enable mirror.ghproxy
     config = function(_, opts)
       -- copied from NvChad config
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
 
-      -- change install url of parsers to gh-proxy
+      -- change install url of parsers to mirror.ghproxy
       ---@diagnostic disable-next-line:redefined-local
       local ok, parsers = pcall(require, "nvim-treesitter.parsers")
       if not ok then
         return
       end
       for _, parser in pairs(parsers.list) do
-        parser.install_info.url = parser.install_info.url:gsub("github", "gh-proxy.com/github")
+        parser.install_info.url = parser.install_info.url:gsub("github", "mirror.ghproxy.com/github")
       end
 
       ---@diagnostic disable-next-line:redefined-local
