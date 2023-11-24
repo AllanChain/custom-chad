@@ -100,7 +100,7 @@ M.section_projects = {
   val = {
     {
       type = "text",
-      val = " Recent Projects",
+      val = " Recent Projects",
       opts = {
         hl = "SpecialComment",
         shrink_margin = false,
@@ -114,11 +114,11 @@ M.section_projects = {
 function M.info_text()
   ---@diagnostic disable-next-line:undefined-field
   local lazy_stats = require("lazy").stats()
-  local total_plugins = " " .. lazy_stats.loaded .. "/" .. lazy_stats.count
+  local total_plugins = "󰂓 " .. lazy_stats.loaded .. "/" .. lazy_stats.count
   total_plugins = total_plugins .. " in " .. lazy_stats.startuptime .. " ms"
   local datetime = os.date " %Y-%m-%d   %A"
   local version = vim.version()
-  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+  local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
 
   return datetime .. "  " .. total_plugins .. nvim_version_info
 end
