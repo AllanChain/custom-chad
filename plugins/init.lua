@@ -3,7 +3,14 @@ return {
                 Configure builtin plugins
   ========================================================]]
   { "NvChad/nvterm", enabled = false },
-  { "NvChad/nvim-colorizer.lua", enabled = false },
+  {
+    "NvChad/nvim-colorizer.lua",
+    opts = {
+      user_default_options = {
+        names = false,
+      },
+    },
+  },
   {
     "nvim-telescope/telescope.nvim",
     ft = { "alpha" },
