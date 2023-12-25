@@ -3,19 +3,7 @@ return {
                 Configure builtin plugins
   ========================================================]]
   { "NvChad/nvterm", enabled = false },
-  {
-    "NvChad/nvim-colorizer.lua",
-    opts = {
-      filetypes = {
-        "css",
-        "javascript",
-        "html",
-        "vue",
-        "svelte",
-        "astro",
-      },
-    },
-  },
+  { "NvChad/nvim-colorizer.lua", enabled = false },
   {
     "nvim-telescope/telescope.nvim",
     ft = { "alpha" },
