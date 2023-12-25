@@ -20,22 +20,6 @@ M.user = {
       end,
       "structural replace",
     },
-    ["<leader>y"] = {
-      function()
-        require("osc52").copy_operator()
-      end,
-      "OSC yank",
-      opts = { expr = true },
-    },
-    ["<leader>yy"] = { "<leader>y_", "OSC yank current", opts = { remap = true } },
-  },
-  v = {
-    ["<leader>y"] = {
-      function()
-        require("osc52").copy_visual()
-      end,
-      "OSC yank",
-    },
   },
 }
 
