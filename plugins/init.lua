@@ -228,6 +228,11 @@ return {
     event = "BufReadPost",
   },
   {
+    "stevearc/dressing.nvim",
+    event = "VimEnter",
+    opts = {},
+  },
+  {
     "ojroques/nvim-osc52", -- yank contents over SSH
     event = "BufReadPost",
     config = function()
