@@ -318,7 +318,7 @@ return {
     end,
   },
   {
-    "zoriya/auto-save.nvim", -- auto save
+    "okuuva/auto-save.nvim", -- auto save
     -- using the fork until https://github.com/Pocco81/auto-save.nvim/pull/67
     event = "BufReadPost",
     config = function()
