@@ -3,6 +3,42 @@
 --======================================================]]
 return {
   {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    lazy = false,
+    config = function()
+      local base30 = require("base46").get_theme_tb "base_30"
+      require("bufferline").setup {
+        options = {
+          separator_style = "slope",
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              highlight = "Directory",
+              separator = '  ', -- use a "true" to enable the default, or set your own character
+            },
+          },
+        },
+        highlights = {
+          fill = {
+            bg = base30.darker_black,
+          },
+          separator_selected = {
+            fg = base30.darker_black,
+          },
+          separator_visible = {
+            fg = base30.darker_black,
+          },
+          separator = {
+            fg = base30.darker_black,
+          },
+        },
+      }
+    end,
+  },
+  {
     "stevearc/dressing.nvim",
     event = "VimEnter",
     opts = {},

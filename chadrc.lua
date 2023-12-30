@@ -8,6 +8,9 @@ M.ui = {
     ConflictIncoming = { bg = "one_bg" },
   },
   theme = "onenord",
+  tabufline = {
+    enabled = false,
+  },
   statusline = {
     overriden_modules = function()
       return {

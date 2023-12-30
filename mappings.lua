@@ -23,6 +23,31 @@ M.user = {
   },
 }
 
+M.bufferline = {
+  n = {
+    ["<tab>"] = {
+      function()
+        require("bufferline").cycle(1)
+      end,
+      "Goto next buffer",
+    },
+
+    ["<S-tab>"] = {
+      function()
+        require("bufferline").cycle(-1)
+      end,
+      "Goto prev buffer",
+    },
+    -- close buffer + hide terminal buffer
+    ["<leader>x"] = {
+      function()
+        require("bufferline").unpin_and_close()
+      end,
+      "Close buffer",
+    },
+  },
+}
+
 M.diagnostics = {
   n = {
     ["<leader>do"] = {
