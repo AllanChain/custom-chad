@@ -5,6 +5,9 @@ return {
   {
     "tiagovla/scope.nvim",
     event = "VimEnter",
+    config = function()
+      require("scope").setup {}
+    end,
   },
   {
     "ahmedkhalf/project.nvim", -- auto cd into project root
