@@ -125,7 +125,7 @@ M.term = {
       function()
         local lazygit = require "custom.integrations.lazygit"
         if lazygit then
-          lazygit:toggle()
+          lazygit.toggle()
         end
       end,
       "open Lazygit",
