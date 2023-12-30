@@ -41,7 +41,10 @@ M.bufferline = {
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
-        require("bufferline").unpin_and_close()
+        local bufferline = require("bufferline")
+        local bufnr = vim.api.nvim_get_current_buf()
+        bufferline.cycle(1)
+        bufferline.unpin_and_close(bufnr)
       end,
       "Close buffer",
     },
