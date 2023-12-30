@@ -3,6 +3,10 @@
 --======================================================]]
 return {
   {
+    "tiagovla/scope.nvim",
+    event = "VimEnter",
+  },
+  {
     "ahmedkhalf/project.nvim", -- auto cd into project root
     lazy = false,
     config = function()
