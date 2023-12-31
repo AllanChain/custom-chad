@@ -9,6 +9,7 @@ return {
     lazy = false,
     config = function()
       local base30 = require("base46").get_theme_tb "base_30"
+      local bar_bg = base30.one_bg
       require("bufferline").setup {
         options = {
           separator_style = "slope",
@@ -16,24 +17,33 @@ return {
             {
               filetype = "NvimTree",
               text = "File Explorer",
-              highlight = "Directory",
+              highlight = "StatusLine",
               separator = '  ', -- use a "true" to enable the default, or set your own character
             },
           },
         },
         highlights = {
           fill = {
-            bg = base30.darker_black,
+            bg = bar_bg,
+          },
+          tab_separator_selected = {
+            fg = bar_bg,
+          },
+          tab_separator = {
+            fg = bar_bg,
           },
           separator_selected = {
-            fg = base30.darker_black,
+            fg = bar_bg,
           },
           separator_visible = {
-            fg = base30.darker_black,
+            fg = bar_bg,
           },
           separator = {
-            fg = base30.darker_black,
+            fg = bar_bg,
           },
+          offset_separator = {
+            bg = bar_bg,
+          }
         },
       }
     end,
