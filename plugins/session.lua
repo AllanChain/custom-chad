@@ -19,6 +19,7 @@ return {
       end
       project.setup {
         detection_methods = { "pattern", "lsp" },
+        scope_chdir = "tab",
         silent_chdir = false,
       }
       local p = require "project_nvim.project"
