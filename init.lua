@@ -19,6 +19,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     if tw == nil then return end
     vim.api.nvim_win_set_option(0, "colorcolumn", tw)
   end
+
+-- autoclose quickfix list after selection item
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "<CR>", "<CR>:cclose<CR>", { buffer = true })
+  end,
 })
 
 -- better autoread on file change
