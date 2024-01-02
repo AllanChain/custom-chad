@@ -68,3 +68,6 @@ vim.filetype.add {
     qml = "qml",
   },
 }
+
+-- Sometimes I got :Qa instead of :qa
+vim.api.nvim_create_user_command("Qa", "qa", {})
