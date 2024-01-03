@@ -102,6 +102,11 @@ M.telescope = {
       "find projects",
       opts = { noremap = true, silent = true },
     },
+    ["<leader>fu"] = {
+      "<cmd> Telescope undo <CR>",
+      "undo history",
+      opts = { noremap = true, silent = true },
+    },
     ["<leader>fF"] = {
       function()
         require("telescope.builtin").find_files {

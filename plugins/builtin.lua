@@ -14,8 +14,9 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     ft = { "alpha" },
+    dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" },
     opts = {
-      extensions_list = { "themes", "projects" },
+      extensions_list = { "themes", "projects", "undo" },
       defaults = {
         mappings = {
           i = {
