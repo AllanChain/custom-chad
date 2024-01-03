@@ -20,8 +20,14 @@ return {
               filetype = "NvimTree",
               text = "File Explorer",
               highlight = "StatusLine",
-              separator = '  ', -- use a "true" to enable the default, or set your own character
+              separator = "  ", -- use a "true" to enable the default, or set your own character
             },
+            {
+              filetype = "aerial",
+              text = "Aerial",
+              highlight = "StatusLine",
+              separator = true,
+            }
           },
         },
         highlights = {
@@ -45,7 +51,7 @@ return {
           },
           offset_separator = {
             bg = bar_bg,
-          }
+          },
         },
       }
     end,
@@ -54,6 +60,10 @@ return {
     "stevearc/dressing.nvim",
     event = "VimEnter",
     opts = {},
+  },
+  {
+    "folke/twilight.nvim",
+    event = "BufReadPost",
   },
   {
     "folke/todo-comments.nvim", -- NOTE: fancy TODO comment
