@@ -14,6 +14,7 @@ M.user = {
     ["<Esc>"] = { ":noh <CR>", "clear highlights", opts = { silent = true } },
     ["<leader>qq"] = { ":q<CR>", "close window", opts = { silent = true } },
     ["<leader>qa"] = { ":qa<CR>", "close all", opts = { silent = true } },
+    ["ZZ"] = { "<cmd>xa<cr>", "close and write", opt = { silent = true } },
     ["<leader>sr"] = {
       function()
         require("ssr").open()
@@ -41,7 +42,7 @@ M.bufferline = {
     -- close buffer + hide terminal buffer
     ["<leader>x"] = {
       function()
-        local bufferline = require("bufferline")
+        local bufferline = require "bufferline"
         local bufnr = vim.api.nvim_get_current_buf()
         bufferline.cycle(1)
         bufferline.unpin_and_close(bufnr)
