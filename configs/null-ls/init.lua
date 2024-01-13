@@ -12,6 +12,11 @@ local b = null_ls.builtins
 
 local cond_cache = {}
 
+local function find_root()
+  local fname = vim.api.nvim_buf_get_name(0)
+  require("null-ls.config").get().root_dir(fname)
+end
+
 local function match_pattern(root, pattern)
   if type(pattern) == "function" then
     return pattern(root)
@@ -44,7 +49,15 @@ local function match_pattern(root, pattern)
 end
 local function create_run_condition(name, pattern)
   return function(params)
-    local root = params.root or utils.get_root()
+    -- NOTE: params.root is not applicable because null-ls never chdir.
+    -- We need to determine the correct root based on current file.
+    local root = find_root()
+    if root == nil then
+      root = vim.loop.cwd()
+    end
+    if root == nil then
+      return
+    end
     if cond_cache[root] == nil then
       cond_cache[root] = {}
     end
