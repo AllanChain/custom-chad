@@ -1,3 +1,5 @@
+local github = require "custom.github"
+
 local M = {}
 
 M.mappings = require "custom.mappings"
@@ -46,7 +48,7 @@ M.ui = {
 M.plugins = "custom.plugins"
 M.lazy_nvim = {
   git = {
-    url_format = "https://mirror.ghproxy.com/github.com/%s.git",
+    url_format = github .. "%s.git",
   },
 }
 

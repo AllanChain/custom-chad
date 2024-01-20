@@ -1,6 +1,8 @@
 --[[======================================================
 --            Configure builtin plugins
 --======================================================]]
+local github = require "custom.github"
+
 return {
   { "NvChad/nvterm", enabled = false },
   {
@@ -57,26 +59,26 @@ return {
         "shellcheck",
       },
       github = {
-        download_url_template = "https://mirror.ghproxy.com/github.com/%s/releases/download/%s/%s",
+        download_url_template = github .. "%s/releases/download/%s/%s",
       },
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    -- Overriding whole config function to enable mirror.ghproxy
+    -- Overriding whole config function to enable github-mirror
     config = function(_, opts)
       -- copied from NvChad config
       dofile(vim.g.base46_cache .. "syntax")
       require("nvim-treesitter.configs").setup(opts)
 
-      -- change install url of parsers to mirror.ghproxy
+      -- change install url of parsers to github-mirror
       ---@diagnostic disable-next-line:redefined-local
       local ok, parsers = pcall(require, "nvim-treesitter.parsers")
       if not ok then
         return
       end
       for _, parser in pairs(parsers.list) do
-        parser.install_info.url = parser.install_info.url:gsub("github", "mirror.ghproxy.com/github")
+        parser.install_info.url = parser.install_info.url:gsub("https://github", github)
       end
 
       ---@diagnostic disable-next-line:redefined-local
