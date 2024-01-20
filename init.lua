@@ -1,13 +1,5 @@
 vim.opt.relativenumber = true
 
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-
--- bootstrap lazy.nvim!
-if not vim.loop.fs_stat(lazypath) then
-  require("core.utils").load_mappings()
-  require("custom.bootstrap").lazy(lazypath)
-end
-
 -- setup colorcolumn based on editorconfig
 vim.api.nvim_create_autocmd("BufEnter", {
   pattern = "*",
