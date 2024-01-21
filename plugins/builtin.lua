@@ -65,29 +65,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    -- Overriding whole config function to enable github-mirror
-    config = function(_, opts)
-      -- copied from NvChad config
-      dofile(vim.g.base46_cache .. "syntax")
-      require("nvim-treesitter.configs").setup(opts)
-
-      -- change install url of parsers to github-mirror
-      ---@diagnostic disable-next-line:redefined-local
-      local ok, parsers = pcall(require, "nvim-treesitter.parsers")
-      if not ok then
-        return
-      end
-      for _, parser in pairs(parsers.list) do
-        parser.install_info.url = parser.install_info.url:gsub("https://github", github)
-      end
-
-      ---@diagnostic disable-next-line:redefined-local
-      local ok, treesitter = pcall(require, "nvim-treesitter.configs")
-      if not ok then
-        return
-      end
-      ---@diagnostic disable-next-line:missing-fields
-      treesitter.setup {
+    opts = {
         ensure_installed = {
           "lua",
           "vim",
@@ -114,7 +92,13 @@ return {
         matchup = {
           enable = true,
         },
-      }
+    },
+    -- Overriding whole config function to enable github-mirror
+    config = function(_, opts)
+      -- copied from NvChad config
+      dofile(vim.g.base46_cache .. "syntax")
+      require("nvim-treesitter.install").prefer_git = true
+      require("nvim-treesitter.configs").setup(opts)
     end,
   },
   {
