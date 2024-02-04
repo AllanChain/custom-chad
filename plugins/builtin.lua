@@ -160,7 +160,7 @@ return {
     },
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "BufReadPost",
     config = function()
       require "custom.configs.null-ls"
