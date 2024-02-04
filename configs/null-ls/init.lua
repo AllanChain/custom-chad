@@ -122,7 +122,9 @@ local sources = {
   --     JS, HTML, and CSS
   --#########################]]
   b.formatting.prettier.with {
-    prefer_local = "node_modules/.bin",
+    generator_opts = {
+      prefer_local = "node_modules/.bin",
+    },
     runtime_condition = create_run_condition("prettier", {
       ".prettierrc",
       { read = "package.json", find = '"prettier"' },
@@ -136,10 +138,6 @@ local sources = {
   },
   b.code_actions.eslint_d.with {
     runtime_condition = create_run_condition("eslint", ".eslintrc"),
-  },
-  b.formatting.rome.with {
-    prefer_local = "node_modules/.bin",
-    runtime_condition = create_run_condition("rome", "rome.json"),
   },
   --[[#########################
   --            Lua
@@ -161,6 +159,6 @@ local sources = {
 }
 
 null_ls.setup {
-  -- debug = true,
+  debug = true,
   sources = sources,
 }
